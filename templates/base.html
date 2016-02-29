@@ -1,0 +1,32 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>Open source love notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/datepicker.css' %}" rel="stylesheet">
+
+    <!--[if lt IE 8]>
+        <link href="{% static 'css/bootstrap-ie7.css' %}" rel="stylesheet">
+    <![endif]-->
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <div class="container">
+
+        {% for message in messages %}
+            <div class="alert {% if message.tags %} alert-{{ message.tags {{{% endif %}">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                
+            </div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+
+    </div>
+
+</body>
+</html>
