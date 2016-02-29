@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class StartView(TemplateView):
     template_name = 'messaging/start.html'
-    
+
 
 class ExampleFormView(FormView):
     template_name = 'messaging/example_form.html'
