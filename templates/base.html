@@ -17,15 +17,25 @@
 
 <body>
     <div class="container">
-
-        {% for message in messages %}
-            <div class="alert {% if message.tags %} alert-{{ message.tags {{{% endif %}">
-                <a class="close" data-dismiss="alert" href="#">&times;</a>
-                
+        <div class="row">
+            <div class="col-md-4 text-right">
+                <h1>Open source community love notes</h1>
+                <ul class="nav nav-pills nav-stacked">
+                    {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Home</a></li>
+                    {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
+                    {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Home</a></li>
+                </ul>
             </div>
-        {% endfor %}
-        {% block content %}{% endblock %}
+            <div class="col-md-8">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %} alert-{{ message.tags {{{% endif %}">
+                        <a class="close" data-dismiss="alert" href="#">&times;</a>
 
+                    </div>
+                {% endfor %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
 
 </body>

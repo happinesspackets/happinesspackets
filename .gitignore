@@ -12,6 +12,7 @@ _build
 .coverage
 htmlcov
 celery.pid
+selenium-screenshots/
 
 syntax: glob
 /media

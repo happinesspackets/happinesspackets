@@ -4,6 +4,14 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 
+class StartViewTest(TestCase):
+    url = reverse('messaging:start')
+
+    def test_renders(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+
 class ExampleFormViewTest(TestCase):
     url = reverse('messaging:example_form_view')
 

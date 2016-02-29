@@ -4,12 +4,16 @@ import logging
 
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 
 from .forms import ExampleForm
 
 logger = logging.getLogger(__name__)
 
+
+class StartView(TemplateView):
+    template_name = 'messaging/start.html'
+    
 
 class ExampleFormView(FormView):
     template_name = 'messaging/example_form.html'
