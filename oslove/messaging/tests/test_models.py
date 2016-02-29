@@ -4,15 +4,15 @@ from django.test import TestCase
 import factory
 
 
-class ExampleModelFactory(factory.DjangoModelFactory):
+class MessageModelFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'messaging.ExampleModel'
+        model = 'messaging.Message'
 
-    status = 'rejected'
+    sender_ip = '127.0.0.1'
 
 
-class ExampleModelTest(TestCase):
+class MessageModelTest(TestCase):
     def test_unique_identifier(self):
-        obj1 = ExampleModelFactory()
-        obj2 = ExampleModelFactory()
+        obj1 = MessageModelFactory()
+        obj2 = MessageModelFactory()
         self.assertNotEqual(obj1.identifier, obj2.identifier)

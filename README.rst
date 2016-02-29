@@ -1,7 +1,10 @@
 oslove
 ===============================
 
-Open Source community love notes
+Open Source community love notes.
+
+This project was build in quite a hurry, so some of the code may be a bit shoddy. We're happy to take your
+pull requests!
 
 To run this project or the tests, you'll have to set up a virtualenv, install the dev requirements and set
 the right ``DJANGO_SETTINGS_MODULE``::
