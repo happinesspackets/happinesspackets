@@ -15,3 +15,5 @@ PASSWORD_HASHERS = (
 )
 
 DATABASES['default']['CONN_MAX_AGE'] = 0
+
+SELENIUM_SCREENSHOT_DIR = PROJECT_DIR.child('selenium-screenshots')

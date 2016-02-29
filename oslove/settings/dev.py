@@ -30,4 +30,4 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
-SELENIUM_SCREENSHOT_DIR = PROJECT_DIR.child('selenium-screenshots').child('demo')
+SELENIUM_SCREENSHOT_DIR = PROJECT_DIR.child('selenium-screenshots')
