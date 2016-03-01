@@ -6,7 +6,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('oslove.messaging.urls', namespace="messaging")),
+    url(r'^', include('happinesspackets.messaging.urls', namespace="messaging")),
 ]
 
 if settings.ADMIN_ENABLED or settings.DEBUG:

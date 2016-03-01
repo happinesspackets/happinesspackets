@@ -1,4 +1,3 @@
-# Django settings for oslove project.
 import os
 
 from django.contrib.messages import constants as messages
@@ -19,7 +18,7 @@ SERVER_EMAIL = ADMINS[0][1]
 
 DEFAULT_FROM_EMAIL = "Erik Romijn <github@erik.io>"
 
-EMAIL_SUBJECT_PREFIX = "[oslove] "
+EMAIL_SUBJECT_PREFIX = "[happinesspackets] "
 
 DOGSLOW_TIMER = 15
 DOGSLOW_LOG_TO_FILE = False
@@ -61,7 +60,7 @@ STATICFILES_DIRS = (
 
 # noinspection PyUnresolvedReferences
 MIDDLEWARE_CLASSES = (
-    'oslove.utils.middleware.SetRemoteAddrFromForwardedFor',
+    'happinesspackets.utils.middleware.SetRemoteAddrFromForwardedFor',
     'dogslow.WatchdogMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -69,10 +68,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'oslove.urls'
+ROOT_URLCONF = 'happinesspackets.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'oslove.wsgi.application'
+WSGI_APPLICATION = 'happinesspackets.wsgi.application'
 
 TEMPLATES = [
     {
@@ -112,7 +111,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'crispy_forms',
 
-    'oslove.messaging',
+    'happinesspackets.messaging',
 )
 
 

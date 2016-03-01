@@ -7,14 +7,14 @@ ret=0
 
 case $CIRCLE_NODE_INDEX in
     0)
-    flake8 oslove || ret=$?
+    flake8 happinesspackets || ret=$?
     ./manage.py makemigrations --dry-run --noinput | grep -i 'no changes detected' || ret=$?
 
     coverage run ./manage.py test -v 2 --noinput && coverage html --fail-under=90 || ret=$?
     ;;
 
     1)
-    ./manage.py test -v 2 -p integration_test*.py --settings=oslove.settings.ci --noinput || ret=$?
+    ./manage.py test -v 2 -p integration_test*.py --settings=happinesspackets.settings.ci --noinput || ret=$?
     ;;
 esac
 

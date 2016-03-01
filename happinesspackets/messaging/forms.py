@@ -7,7 +7,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, HTML
 from django import forms
 
-from oslove.messaging.models import Message
+from .models import Message
 
 logger = logging.getLogger(__name__)
 
@@ -37,11 +37,11 @@ class MessageSendForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Fieldset('This message is from...', 'sender_name', 'sender_email'),
-            Fieldset("You're sending some love to...", 'recipient_name', 'recipient_email'),
+            Fieldset("You're sending some happiness to...", 'recipient_name', 'recipient_email'),
             Fieldset("Your message is...", 'message'),
             Fieldset("Privacy choices", 'sender_named', 'sender_approved_public', 'sender_approved_public_named'),
             HTML("<br>"),
-            Submit('submit', 'Send some love', css_class='btn-lg btn-block'),
+            Submit('submit', 'Send some happiness', css_class='btn-lg btn-block'),
         )
 
     def clean(self):

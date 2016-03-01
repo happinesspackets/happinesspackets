@@ -14,10 +14,10 @@ class MessagingIntegrationTest(BaseTestCase):
 
         ################################
         # Start page
-        self.wait_for_element(tag_name='h2', tag_text='What is open source community love notes?')
+        self.wait_for_element(tag_name='h2', tag_text='What are open-source happiness packets?')
         self.d.save_screenshot(self.screenshot_dir.child('messaging_start_01.png'))
 
-        self.d.find_element_by_link_text("Send a message").click()
+        self.d.find_element_by_link_text("Send some happiness").click()
 
         ################################
         # New message
@@ -37,4 +37,4 @@ class MessagingIntegrationTest(BaseTestCase):
 
         ################################
         # End back on start page
-        self.wait_for_element(tag_name='h2', tag_text='What is open source community love notes?')
+        self.wait_for_element(tag_name='h2', tag_text='What are open-source happiness packets?')

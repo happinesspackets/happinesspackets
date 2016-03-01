@@ -13,7 +13,7 @@ machine:
     DJANGO_ALLOWED_HOSTS: '*'
     DJANGO_LOGFILE: /tmp/django.log
     SECRET_KEY: 'integration-test-only'
-    DJANGO_SETTINGS_MODULE: oslove.settings.ci
+    DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
     PORTAL_CELERY_TASK_QUEUE: celery
     PYTHONUNBUFFERED: x
 

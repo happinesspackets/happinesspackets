@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <title>Open source love notes</title>
+    <title>Open-source happiness packets</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,10 +20,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 text-right">
-                <h1>Open source community love notes</h1>
+                <h1>Open-source happiness packets</h1>
                 <ul class="nav nav-pills nav-stacked">
                     {% url 'messaging:start' as url %}<li role="presentation" {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url }}">Home</a></li>
-                    {% url 'messaging:send' as url %} <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send a message</a></li>
+                    {% url 'messaging:send' as url %} <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness</a></li>
                     {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.pathXXX %}class="active"{% endif %}><a href="{{ url }}">Message inspiration</a></li>
                     {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.pathXXX %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
                 </ul>

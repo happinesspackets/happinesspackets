@@ -5,7 +5,7 @@ import logging
 
 from model_utils import Choices
 
-from oslove.utils.misc import readable_random_token
+from happinesspackets.utils.misc import readable_random_token
 from django.db import models
 from model_utils.models import TimeStampedModel
 

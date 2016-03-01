@@ -1,6 +1,6 @@
 # .coveragerc to control coverage.py
 [run]
-include = oslove/*
+include = happinesspackets/*
 
 [report]
 exclude_lines =
@@ -20,8 +20,8 @@ exclude_lines =
     if __name__ == .__main__.:
 
 omit =
-    oslove/settings/*
-    oslove/*/migrations/*
-    oslove/urls.py
+    happinesspackets/settings/*
+    happinesspackets/*/migrations/*
+    happinesspackets/urls.py
 
 show_missing = True
