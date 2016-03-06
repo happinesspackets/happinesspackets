@@ -1,0 +1,10 @@
+Hello!
+
+You just submitted a happiness packet for {{ message.recipient_name }}.
+To confirm sending your message, just open this link:
+
+{{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}
+
+If you've changed your mind, don't open the link, and we won't send the message.
+
+Thanks for helping us spread some happiness!

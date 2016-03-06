@@ -8,6 +8,10 @@ class MessageModelFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'messaging.Message'
 
+    sender_name = 'Sender sender'
+    sender_email = 'sendersender@null'
+    recipient_name = 'Recipient recipient'
+    recipient_email = 'sendersender@null'
     sender_ip = '127.0.0.1'
 
 

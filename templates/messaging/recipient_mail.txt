@@ -1,0 +1,19 @@
+Hello {{ message.recipient_name }}!
+
+You've just received a happiness packet{% if message.sender_named %}from {{ message.sender_name }}{% endif %}!
+{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
+
+If this is the first time you've heard about Happiness Packets # TODO insert brief
+
+Here's what they wrote:
+---------------------
+{{ message.message }}
+---------------------
+
+We'd like to be able to publish some of the happiness packets, but we'll
+only do so after opt-in of both you and the sender. To give permission for
+this, please go to:
+{{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}
+This is entirely optional.
+
+Have a great day!

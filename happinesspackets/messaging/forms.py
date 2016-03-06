@@ -34,6 +34,7 @@ class MessageSendForm(forms.ModelForm):
         self.fields['sender_named'].label = 'You can tell the recipient my name and email address.'
         self.fields['sender_approved_public'].label = "I'm OK with you publishing this message publicly"
         self.fields['sender_approved_public_named'].label = "...and you can even include our names publicly."
+        self.fields['sender_approved_public_named'].help_text = "Note that we won't publish anything unless the recipient opts in too."
 
         self.helper.layout = Layout(
             Fieldset('This message is from...', 'sender_name', 'sender_email'),
@@ -50,3 +51,33 @@ class MessageSendForm(forms.ModelForm):
             self.add_error('sender_approved_public_named', "If you want us to publish the message including your name, "
                                                            "you must also check 'I'm OK with you publishing this "
                                                            "message publicly'")
+
+
+class MessageRecipientForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['recipient_approved_public', 'recipient_approved_public_named']
+
+    def __init__(self, *args, **kwargs):
+        super(MessageRecipientForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-md-3'
+        self.helper.field_class = 'col-md-8'
+
+        self.fields['recipient_approved_public'].label = "I'm OK with you publishing this message publicly"
+        self.fields['recipient_approved_public_named'].label = "...and you can even include our names publicly."
+        self.fields['recipient_approved_public_named'].help_text = "Note that we won't publish anything unless the sender opted in too."
+
+        self.helper.layout = Layout(
+            Fieldset("Privacy choices", 'recipient_approved_public', 'recipient_approved_public_named'),
+            HTML("<br>"),
+            Submit('submit', 'Save privacy choices', css_class='btn-lg btn-block'),
+        )
+
+    def clean(self):
+        super(MessageRecipientForm, self).clean()
+        if self.cleaned_data.get('recipient_approved_public_named') and not self.cleaned_data.get('recipient_approved_public'):
+            self.add_error('recipient_approved_public_named', "If you want us to publish the message including your "
+                                                              "name, you must also check 'I'm OK with you publishing "
+                                                              "this message publicly'")

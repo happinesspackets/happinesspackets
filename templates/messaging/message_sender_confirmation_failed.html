@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h2>Link not valid</h2>
+    </div>
+
+    {% if not_found %}
+        <div class="alert alert-danger">
+            We couldn't find this message. Make sure you didn't leave part off the end of the link.
+        </div>
+    {% elif already_confirmed %}
+        <div class="alert alert-info">
+            You've already confirmed this message.
+        </div>
+    {% endif %}
+
+{% endblock content %}
+

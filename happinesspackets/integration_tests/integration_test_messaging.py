@@ -21,7 +21,7 @@ class MessagingIntegrationTest(BaseTestCase):
 
         ################################
         # New message
-        self.wait_for_element(tag_name='h2', tag_text='Send a message')
+        self.wait_for_element(tag_name='h2', tag_text='Send some happiness')
 
         self.d.find_element_by_name('sender_name').send_keys('Erik Romijn')
         self.d.find_element_by_name('sender_email').send_keys('sender@erik.io')
@@ -36,5 +36,5 @@ class MessagingIntegrationTest(BaseTestCase):
         # TODO: check for database objects being created here
 
         ################################
-        # End back on start page
-        self.wait_for_element(tag_name='h2', tag_text='What are open-source happiness packets?')
+        # Email confirmation link sent
+        self.wait_for_element(tag_name='h2', tag_text='Check your email')

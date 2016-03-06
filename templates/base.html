@@ -29,15 +29,23 @@
                 </ul>
             </div>
             <div class="col-md-8">
-                {% for message in messages %}
-                    <div class="alert {% if message.tags %} alert-{{ message.tags {{{% endif %}">
+                {% for django_message in messages %}
+                    <br>
+                    <div class="alert {% if django_message.tags %} alert-{{ django_message.tags }}{% endif %}">
                         <a class="close" data-dismiss="alert" href="#">&times;</a>
-
+                        {{ django_message }}
                     </div>
                 {% endfor %}
                 {% block content %}{% endblock %}
             </div>
         </div>
+        <footer class="text-right"><small>
+            <hr>
+            Open-source happiness projects is an
+            <a href="https://github.com/erikr/happinesspackets/">open-source project by
+            <a href="https://twitter.com/erikpub">Erik Romijn</a>
+            <a href="https://twitter.com/thatdocslady">Mikey Ariel</a>.
+        </small></footer>
     </div>
 
 </body>

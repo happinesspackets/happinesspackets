@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 
 import logging
 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from model_utils import Choices
 
 from happinesspackets.utils.misc import readable_random_token
@@ -29,6 +32,7 @@ class Message(TimeStampedModel):
 
     recipient_name = models.CharField(max_length=255)
     recipient_email = models.EmailField()
+    recipient_email_token = models.CharField(max_length=255, db_index=True)
 
     message = models.TextField()
 
@@ -44,3 +48,30 @@ class Message(TimeStampedModel):
             while Message.objects.filter(identifier=self.identifier).count():
                 self.identifier = readable_random_token(alphanumeric=True)  # pragma: no cover
         return super(Message, self).save(force_insert, force_update, using, update_fields)
+
+    def send_sender_confirmation(self, use_https, domain):
+        self.sender_email_token = readable_random_token(alphanumeric=True)
+        context = {
+            'message': self,
+            'protocol': 'https' if use_https else 'http',
+            'domain': domain,
+        }
+        subject = render_to_string('messaging/sender_confirmation_subject.txt', context)
+        subject = ' '.join(subject.splitlines())
+        body = render_to_string('messaging/sender_confirmation_mail.txt', context)
+        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [self.sender_email])
+        self.save()
+
+    def send_to_recipient(self, use_https, domain):
+        self.recipient_email_token = readable_random_token(alphanumeric=True)
+        self.status = Message.STATUS.sent
+        context = {
+            'message': self,
+            'protocol': 'https' if use_https else 'http',
+            'domain': domain,
+        }
+        subject = render_to_string('messaging/recipient_subject.txt', context)
+        subject = ' '.join(subject.splitlines())
+        body = render_to_string('messaging/recipient_mail.txt', context)
+        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [self.recipient_email])
+        self.save()
