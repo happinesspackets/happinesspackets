@@ -17,6 +17,14 @@ class StartViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+class FaqViewTest(TestCase):
+    url = reverse('messaging:faq')
+
+    def test_renders(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+
 class SendViewTest(TestCase):
     url = reverse('messaging:send')
 

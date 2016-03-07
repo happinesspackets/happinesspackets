@@ -17,6 +17,10 @@ class StartView(TemplateView):
     template_name = 'messaging/start.html'
 
 
+class FaqView(TemplateView):
+    template_name = 'messaging/faq.html'
+
+
 class MessageSendView(FormView):
     template_name = 'messaging/message_send_form.html'
     form_class = MessageSendForm

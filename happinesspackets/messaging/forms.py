@@ -32,7 +32,7 @@ class MessageSendForm(forms.ModelForm):
         self.fields['recipient_email'].label = 'Email'
         self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="#">message inspiration</a>.'
         self.fields['sender_named'].label = 'You can tell the recipient my name and email address.'
-        self.fields['sender_approved_public'].label = "I'm OK with you publishing this message publicly"
+        self.fields['sender_approved_public'].label = "I'm OK with you publishing this message publicly."
         self.fields['sender_approved_public_named'].label = "...and you can even include our names publicly."
         self.fields['sender_approved_public_named'].help_text = "Note that we won't publish anything unless the recipient opts in too."
 
@@ -65,7 +65,7 @@ class MessageRecipientForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-8'
 
-        self.fields['recipient_approved_public'].label = "I'm OK with you publishing this message publicly"
+        self.fields['recipient_approved_public'].label = "I'm OK with you publishing this message publicly."
         self.fields['recipient_approved_public_named'].label = "...and you can even include our names publicly."
         self.fields['recipient_approved_public_named'].help_text = "Note that we won't publish anything unless the sender opted in too."
 
