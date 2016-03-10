@@ -1,7 +1,6 @@
 Hello {{ message.recipient_name }}!
 
-You've just received a happiness packet{% if message.sender_named %}from {{ message.sender_name }}{% endif %}!
-{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
+You've just received a happiness packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
 
 If this is the first time you've heard about Happiness Packets # TODO insert brief
 
