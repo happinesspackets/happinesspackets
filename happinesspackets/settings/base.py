@@ -16,7 +16,7 @@ ADMINS = (
 )
 SERVER_EMAIL = ADMINS[0][1]
 
-DEFAULT_FROM_EMAIL = "Erik Romijn <github@erik.io>"
+DEFAULT_FROM_EMAIL = "Happiness Packets <info@happinesspackets.io>"
 
 EMAIL_SUBJECT_PREFIX = "[happinesspackets] "
 
