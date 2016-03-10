@@ -29,9 +29,16 @@
         are thankful to in your community. We can pass the message anonymously if you want, to reduce any reluctance.
         We do encourage you to include your name though.
     </p>
+
+    <h3>Happiness archive</h3>
     <p>
-        If both you and the recipient agree, we can even publish your message for others to see. That way, we'll
-        be building on an archive of open-source happiness.
+        If both you and the recipient agree, we can even
+        <a href="{% url 'messaging:archive' %}">publish your message</a> for others to see. That way, we'll
+        be building on an archive of open-source happiness. Here's a random message from
+        <a href="{% url 'messaging:archive' %}">our archive</a>.
     </p>
+
+    <h4>From Erik Romijn to Ola Sitarska</h4>
+    <blockquote>{% lorem 1 p random %}</blockquote>
 
 {% endblock content %}
