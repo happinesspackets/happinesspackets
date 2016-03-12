@@ -27,11 +27,18 @@ aside .sidebar {
 
 aside .sidebar a {
     color: white;
+    font-family: Lora, sans-serif;
+    font-size: 18px;
 }
 
 aside .sidebar a:hover {
     text-decoration: underline;
     background: none;
+}
+
+aside .sidebar .logo {
+    max-width: 30%;
+    margin: 30px 0;
 }
 
 main {
@@ -105,6 +112,10 @@ blockquote {
     aside .sidebar {
         max-width: 300px;
         float: right;
+    }
+
+    aside .sidebar .logo {
+        max-width: 90%;
     }
 
     main {

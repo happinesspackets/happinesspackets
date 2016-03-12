@@ -20,9 +20,9 @@
 <body>
     <aside>
       <div class="sidebar">
-        <h1>Open-source happiness packets</h1>
+        {% url 'messaging:start' as url %}
+        <a href="{{ url }}"><img src="{% static 'images/logo.png' %}" alt="Open-source happiness packets" class="logo"/></a>
         <ul class="nav nav-stacked">
-          {% url 'messaging:start' as url %}<li role="presentation" {% if request.path == '/' %}class="active"{% endif %}><a href="{{ url }}">Home</a></li>
           {% url 'messaging:send' as url %} <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness</a></li>
           {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.pathXXX %}class="active"{% endif %}><a href="{{ url }}">Message inspiration</a></li>
           {% url 'messaging:faq' as url %}<li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
