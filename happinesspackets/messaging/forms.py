@@ -42,7 +42,7 @@ class MessageSendForm(forms.ModelForm):
             Fieldset("Your message is...", 'message'),
             Fieldset("Privacy choices", 'sender_named', 'sender_approved_public', 'sender_approved_public_named'),
             HTML("<br>"),
-            Submit('submit', 'Send some happiness', css_class='btn-lg btn-block'),
+            Submit('submit', 'Send some happiness', css_class='btn-lg centered'),
         )
 
     def clean(self):
@@ -72,7 +72,7 @@ class MessageRecipientForm(forms.ModelForm):
         self.helper.layout = Layout(
             Fieldset("Privacy choices", 'recipient_approved_public', 'recipient_approved_public_named'),
             HTML("<br>"),
-            Submit('submit', 'Save privacy choices', css_class='btn-lg btn-block'),
+            Submit('submit', 'Save privacy choices', css_class='btn-lg centered'),
         )
 
     def clean(self):
