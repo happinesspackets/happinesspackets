@@ -37,7 +37,7 @@ aside .sidebar a:hover {
 }
 
 aside .sidebar .logo {
-    max-width: 30%;
+    max-height: 140px;
     margin: 30px 0;
 }
 
@@ -107,6 +107,9 @@ blockquote {
         width: 25%;
         height: calc(100% + 20px);
         position: fixed;
+        background: -moz-linear-gradient(top,  #F23030 0%, #f64747 27%, #f64747 27%, #F23030 100%);
+        background: -webkit-linear-gradient(top,  #F23030 0%,#f64747 27%,#f64747 27%,#F23030 100%);
+        background: linear-gradient(to bottom,  #F23030 0%,#f64747 27%,#f64747 27%,#F23030 100%);
     }
 
     aside .sidebar {
@@ -116,6 +119,7 @@ blockquote {
 
     aside .sidebar .logo {
         max-width: 90%;
+        max-height: 300px;
     }
 
     main {
