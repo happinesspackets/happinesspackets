@@ -13,7 +13,9 @@ DATABASES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 2525
 SECRET_KEY = 'only-for-testing'
 
 INTERNAL_IPS = ('127.0.0.1',)

@@ -1,0 +1,24 @@
+{% extends 'base_email.html' %}
+
+{% block content %}
+
+<p>Hello!</p>
+
+<p>
+    You just submitted a happiness packet for {{ message.recipient_name }}.
+    To confirm sending your message, just open this link:
+</p>
+
+<p>
+    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}" role="button" style="display: inline-block; background: #F64747;color: white;text-transform: uppercase;padding: 0.9em 1.3em;text-decoration: none;border-radius: 6px">Confirm my message</a>
+</p>
+
+<p>
+    If you've changed your mind, don't open the link, and we won't send the message.
+</p>
+
+<p>
+    Thanks for helping us spread some happiness!
+</p>
+
+{% endblock %}

@@ -3,12 +3,10 @@ from __future__ import unicode_literals
 
 import logging
 
-from django.conf import settings
-from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from model_utils import Choices
 
-from happinesspackets.utils.misc import readable_random_token
+from happinesspackets.utils.misc import readable_random_token, send_html_mail
 from django.db import models
 from model_utils.models import TimeStampedModel
 
@@ -58,8 +56,9 @@ class Message(TimeStampedModel):
         }
         subject = render_to_string('messaging/sender_confirmation_subject.txt', context)
         subject = ' '.join(subject.splitlines())
-        body = render_to_string('messaging/sender_confirmation_mail.txt', context)
-        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [self.sender_email])
+        body_txt = render_to_string('messaging/sender_confirmation_mail.txt', context)
+        body_html = render_to_string('messaging/sender_confirmation_mail.html', context)
+        send_html_mail(subject, body_txt, body_html, self.sender_email)
         self.save()
 
     def send_to_recipient(self, use_https, domain):
@@ -72,6 +71,7 @@ class Message(TimeStampedModel):
         }
         subject = render_to_string('messaging/recipient_subject.txt', context)
         subject = ' '.join(subject.splitlines())
-        body = render_to_string('messaging/recipient_mail.txt', context)
-        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [self.recipient_email])
+        body_txt = render_to_string('messaging/recipient_mail.txt', context)
+        body_html = render_to_string('messaging/recipient_mail.html', context)
+        send_html_mail(subject, body_txt, body_html, self.recipient_email)
         self.save()

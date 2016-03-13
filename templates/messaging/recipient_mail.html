@@ -1,0 +1,32 @@
+{% extends 'base_email.html' %}
+
+{% block content %}
+
+<p>Hello {{ message.recipient_name }}!</p>
+
+<p>
+    You've just received a happiness packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!
+    {% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
+</p>
+
+<p>
+    If this is the first time you've heard about Happiness Packets # TODO insert brief
+</p>
+
+<p>Here's what they wrote:</p>
+
+<p><em>{{ message.message|linebreaksbr }}</em></p>
+
+<p>
+    We'd like to be able to publish some of the happiness packets, but we'll
+    only do so after opt-in of both you and the sender.
+</p>
+
+<p>
+    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}" role="button" style="display: inline-block; background: #F64747;color: white;text-transform: uppercase;padding: 0.9em 1.3em;text-decoration: none;border-radius: 6px">Set permissions for publishing</a>
+</p>
+
+<p>This is entirely optional.</p>
+
+<p>Have a great day!</p>
+{% endblock %}
