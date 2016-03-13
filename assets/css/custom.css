@@ -1,4 +1,141 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.8em;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    margin-top: 1.4em;
+}
+
+a, a:hover {
+    color: #F64747;
+}
+
+aside {
+    background: #F64747;
+    margin: -20px 0 0 0;
+}
+
+aside .sidebar {
+    padding: 30px 15px;
+    text-align: center;
+    color: white;
+}
+
+aside .sidebar a {
+    color: white;
+    font-family: Lora, sans-serif;
+    font-size: 18px;
+}
+
+aside .sidebar a:hover {
+    text-decoration: underline;
+    background: none;
+}
+
+aside .sidebar .logo {
+    max-height: 140px;
+    margin: 30px 0;
+}
+
+main {
+    margin-bottom: 30px;
+}
+
+fieldset {
+    margin-top: 1em;
+}
+
+fieldset legend {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    border-bottom: 0px;
+}
+
+blockquote {
+    border-left: 0px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.7);
+    background: url(/static/images/loveletter.png) no-repeat;
+    background-size: 20%;
+    background-position: 0 20px;
+    padding-left: calc(20% + 20px);
+    min-height: 120px;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.btn {
+    background: white;
+    border: 1px solid #F64747;
+    color: #F64747;
+    text-transform: uppercase;
+    padding: 0.9em 1.3em;
+}
+
+.btn:hover {
+    background: #F64747;
+    color: white;
+    border: 1px solid #F64747;
+}
+
+.row.content {
+    min-height: 200px;
+}
+
+.lead {
+    line-height: 1.8em;
+}
+
 .asteriskField {
     display: none;
 }
 
+#faq h3 {
+    margin-top: 2em;
+}
+
+@media (min-width: 992px) {
+    aside {
+        width: 25%;
+        height: calc(100% + 20px);
+        position: fixed;
+        background: -moz-linear-gradient(top,  #F23030 0%, #f64747 27%, #f64747 27%, #F23030 100%);
+        background: -webkit-linear-gradient(top,  #F23030 0%,#f64747 27%,#f64747 27%,#F23030 100%);
+        background: linear-gradient(to bottom,  #F23030 0%,#f64747 27%,#f64747 27%,#F23030 100%);
+    }
+
+    aside .sidebar {
+        max-width: 300px;
+        float: right;
+    }
+
+    aside .sidebar .logo {
+        max-width: 90%;
+        max-height: 300px;
+    }
+
+    main {
+        margin-left: 25%;
+    }
+
+    main .container {
+        padding: 0px 50px;
+        width: 100%;
+    }
+
+    blockquote {
+        min-height: 130px;
+    }
+
+    .row.content {
+        min-height: 500px;
+    }
+}
