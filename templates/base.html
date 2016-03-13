@@ -20,39 +20,48 @@
 
 <body>
     <aside>
-      <div class="sidebar">
-        {% url 'messaging:start' as url %}
-        <a href="{{ url }}"><img src="{% static 'images/logo.png' %}" alt="Open-source happiness packets" class="logo"/></a>
-        <ul class="nav nav-stacked">
-          {% url 'messaging:send' as url %} <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness</a></li>
-          {% url 'messaging:start' as url %}<li role="presentation" {% if url in request.pathXXX %}class="active"{% endif %}><a href="{{ url }}">Message inspiration</a></li>
-          {% url 'messaging:faq' as url %}<li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
-          {% url 'messaging:archive' as url %}<li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Happiness archive</a></li>        </ul>
-      </div>
+        <div class="sidebar">
+            {% url 'messaging:start' as url %}
+            <a href="{{ url }}"><img src="{% static 'images/logo.png' %}" alt="Open-source happiness packets" class="logo"/></a>
+            <ul class="nav nav-stacked">
+                {% url 'messaging:send' as url %}
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness</a></li>
+                {% url 'messaging:start' as url %}
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">What are open-source happiness packets?</a></li>
+                {% url 'messaging:inspiration' as url %}
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Message inspiration</a></li>
+                {% url 'messaging:faq' as url %}
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
+                {% url 'messaging:archive' as url %}
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Happiness archive</a></li>
+            </ul>
+        </div>
     </aside>
     <main>
-      <div class="container">
-          <div class="row content">
-              <div class="col-md-10">
-                  {% for django_message in messages %}
-                      <br>
-                      <div class="alert {% if django_message.tags %} alert-{{ django_message.tags }}{% endif %}">
-                          <a class="close" data-dismiss="alert" href="#">&times;</a>
-                          {{ django_message }}
-                      </div>
-                  {% endfor %}
-                  {% block content %}{% endblock %}
-              </div>
-          </div>
-          <footer><small>
-              <hr>
-              Open-source happiness projects is an
-              <a href="https://github.com/erikr/happinesspackets/">open-source project</a> by
-              <a href="https://twitter.com/erikpub">Erik Romijn</a> and
-              <a href="https://twitter.com/thatdocslady">Mikey Ariel</a>.
-              Need help? <a href="mailto:info@happinesspackets.io">info@happinesspackets.io</a>
-          </small></footer>
-      </div>
+        <div class="container">
+            <div class="row content">
+                <div class="col-md-10">
+                    {% for django_message in messages %}
+                        <br>
+                        <div class="alert {% if django_message.tags %} alert-{{ django_message.tags }}{% endif %}">
+                            <a class="close" data-dismiss="alert" href="#">&times;</a>
+                            {{ django_message }}
+                        </div>
+                    {% endfor %}
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+            <footer><small>
+                <hr>
+                Open-source happiness packets is an
+                <a href="https://github.com/erikr/happinesspackets/">open-source project</a> by
+                <a href="https://twitter.com/erikpub">Erik Romijn</a> and
+                <a href="https://twitter.com/thatdocslady">Mikey Ariel</a>.
+                Design and artwork by <a href="https://twitter.com/olasitarska">Ola Sitarska</a>.
+                <br>
+                Need help? <a href="mailto:info@happinesspackets.io">info@happinesspackets.io</a>
+            </small></footer>
+        </div>
     </main>
 </body>
 </html>

@@ -45,6 +45,10 @@ main {
     margin-bottom: 30px;
 }
 
+footer {
+    text-align: right;
+}
+
 fieldset {
     margin-top: 1em;
 }

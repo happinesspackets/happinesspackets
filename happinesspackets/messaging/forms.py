@@ -6,6 +6,7 @@ import logging
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, HTML
 from django import forms
+from django.core.urlresolvers import reverse
 
 from .models import Message
 
@@ -30,7 +31,7 @@ class MessageSendForm(forms.ModelForm):
         self.fields['sender_email'].help_text = "We'll send you a confirmation link before sending your message out."
         self.fields['recipient_name'].label = 'Name'
         self.fields['recipient_email'].label = 'Email'
-        self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="#">message inspiration</a>.'
+        self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="%s">message inspiration</a>.' % reverse('messaging:inspiration')
         self.fields['sender_named'].label = 'You can tell the recipient my name and email address.'
         self.fields['sender_approved_public'].label = "I'm OK with you publishing this message publicly."
         self.fields['sender_approved_public_named'].label = "...and you can even include our names publicly."

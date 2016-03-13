@@ -25,6 +25,10 @@ class ArchiveView(TemplateView):
     template_name = 'messaging/archive.html'
 
 
+class InspirationView(TemplateView):
+    template_name = 'messaging/inspiration.html'
+
+
 class MessageSendView(FormView):
     template_name = 'messaging/message_send_form.html'
     form_class = MessageSendForm
