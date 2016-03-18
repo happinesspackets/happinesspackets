@@ -15,4 +15,4 @@ this, please go to:
 {{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}
 This is entirely optional.
 
-Have a great day!
+{% include '_email_footer.txt' %}

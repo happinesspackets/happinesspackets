@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.test import TestCase
+
 import factory
+from django.test import TestCase
 
 
 class MessageModelFactory(factory.DjangoModelFactory):
@@ -11,8 +12,16 @@ class MessageModelFactory(factory.DjangoModelFactory):
     sender_name = 'Sender sender'
     sender_email = 'sendersender@null'
     recipient_name = 'Recipient recipient'
-    recipient_email = 'sendersender@null'
+    recipient_email = 'recipientrecipient@null'
     sender_ip = '127.0.0.1'
+
+
+class BlacklistedEmailFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'messaging.BlacklistedEmail'
+
+    email = 'emailemail@null'
+    confirmation_ip = '127.0.0.1'
 
 
 class MessageModelTest(TestCase):

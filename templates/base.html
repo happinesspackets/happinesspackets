@@ -44,7 +44,6 @@
                     {% for django_message in messages %}
                         <br>
                         <div class="alert {% if django_message.tags %} alert-{{ django_message.tags }}{% endif %}">
-                            <a class="close" data-dismiss="alert" href="#">&times;</a>
                             {{ django_message }}
                         </div>
                     {% endfor %}

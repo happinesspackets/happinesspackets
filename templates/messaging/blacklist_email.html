@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="page-header">
+        <h2>Blacklist email address</h2>
+    </div>
+
+    <p>
+        If you don't want us to email you on <em>{{ email }}</em> ever again, confirm by
+        clicking the button below. If anyone tries to send a message using your email as sender
+        or recipient, we'll them we can't send emails to this address.
+    </p>
+
+    <p>
+        After this, you may still receive some messages that were already underway.
+    </p>
+
+    <form method="post" >{% csrf_token %}
+        <input type="submit" name="submit" value="Never email me again" class="btn btn-primary btn-lg centered" id="submit-id-submit">
+    </form>
+
+{% endblock content %}
+

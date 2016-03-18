@@ -3,14 +3,17 @@ from __future__ import unicode_literals
 
 import logging
 
-from django.template.loader import render_to_string
-from model_utils import Choices
-
-from happinesspackets.utils.misc import readable_random_token, send_html_mail
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.template.loader import render_to_string
+from django.utils.crypto import salted_hmac
+from model_utils import Choices
 from model_utils.models import TimeStampedModel
 
+from happinesspackets.utils.misc import readable_random_token, send_html_mail
+
 logger = logging.getLogger(__name__)
+BLACKLIST_HMAC_SALT = 'happinesspackets.messaging.views.BlacklistEmailView'
 
 
 class Message(TimeStampedModel):
@@ -48,11 +51,15 @@ class Message(TimeStampedModel):
         return super(Message, self).save(force_insert, force_update, using, update_fields)
 
     def send_sender_confirmation(self, use_https, domain):
+        blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.sender_email).hexdigest()
+        blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.sender_email, 'digest': blacklist_digest})
         self.sender_email_token = readable_random_token(alphanumeric=True)
         context = {
             'message': self,
             'protocol': 'https' if use_https else 'http',
             'domain': domain,
+            'recipient': self.sender_email,
+            'blacklist_url': blacklist_url,
         }
         subject = render_to_string('messaging/sender_confirmation_subject.txt', context)
         subject = ' '.join(subject.splitlines())
@@ -62,12 +69,16 @@ class Message(TimeStampedModel):
         self.save()
 
     def send_to_recipient(self, use_https, domain):
+        blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.sender_email).hexdigest()
+        blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.sender_email, 'digest': blacklist_digest})
         self.recipient_email_token = readable_random_token(alphanumeric=True)
         self.status = Message.STATUS.sent
         context = {
             'message': self,
             'protocol': 'https' if use_https else 'http',
             'domain': domain,
+            'recipient': self.recipient_email,
+            'blacklist_url': blacklist_url,
         }
         subject = render_to_string('messaging/recipient_subject.txt', context)
         subject = ' '.join(subject.splitlines())
@@ -75,3 +86,8 @@ class Message(TimeStampedModel):
         body_html = render_to_string('messaging/recipient_mail.html', context)
         send_html_mail(subject, body_txt, body_html, self.recipient_email)
         self.save()
+
+
+class BlacklistedEmail(TimeStampedModel):
+    email = models.EmailField()
+    confirmation_ip = models.GenericIPAddressField()

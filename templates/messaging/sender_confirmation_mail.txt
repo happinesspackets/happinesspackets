@@ -8,3 +8,5 @@ To confirm sending your message, just open this link:
 If you've changed your mind, don't open the link, and we won't send the message.
 
 Thanks for helping us spread some happiness!
+
+{% include '_email_footer.txt' %}

@@ -4,9 +4,10 @@ from __future__ import unicode_literals
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.utils.crypto import salted_hmac
 
-from .test_models import MessageModelFactory
-from ..models import Message
+from .test_models import MessageModelFactory, BlacklistedEmailFactory
+from ..models import Message, BLACKLIST_HMAC_SALT, BlacklistedEmail
 
 
 class StartViewTest(TestCase):
@@ -39,6 +40,35 @@ class ArchiveViewTest(TestCase):
     def test_renders(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+
+
+class BlacklistViewTest(TestCase):
+    url_name = 'messaging:blacklist_email'
+
+    def setUp(self):
+        self.message = MessageModelFactory()
+        self.correct_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.message.recipient_email).hexdigest()
+        self.url_kwargs = {'email': self.message.recipient_email, 'digest': self.correct_digest}
+        self.url = reverse(self.url_name, kwargs=self.url_kwargs)
+
+    def test_renders(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_confirm(self):
+        response = self.client.post(self.url)
+        self.assertRedirects(response, reverse('messaging:start'))
+        obj = BlacklistedEmail.objects.get()
+        self.assertEqual(obj.email, self.message.recipient_email)
+
+    def test_validates_digest(self):
+        self.url_kwargs['email'] = self.message.sender_email
+        self.url = reverse(self.url_name, kwargs=self.url_kwargs)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 404)
+        response = self.client.post(self.url)
+        self.assertEqual(response.status_code, 404)
+        self.assertFalse(BlacklistedEmail.objects.count())
 
 
 class SendViewTest(TestCase):
@@ -76,6 +106,14 @@ class SendViewTest(TestCase):
         self.post_data['sender_approved_public'] = False
         response = self.client.post(self.url, self.post_data)
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['form'].errors), 1)
+
+    def test_post_invalid_blacklisted(self):
+        BlacklistedEmailFactory(email=self.post_data['sender_email'])
+        BlacklistedEmailFactory(email=self.post_data['recipient_email'])
+        response = self.client.post(self.url, self.post_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['form'].errors), 2)
 
 
 class MessageSentViewTest(TestCase):
