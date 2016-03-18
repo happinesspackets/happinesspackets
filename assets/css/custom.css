@@ -102,6 +102,10 @@ blockquote {
     display: none;
 }
 
+#div_id_hp {
+    display: none;
+}
+
 #faq h3 {
     margin-top: 2em;
 }

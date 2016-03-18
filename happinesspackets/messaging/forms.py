@@ -19,6 +19,8 @@ def validate_email(email):
 
 
 class MessageSendForm(forms.ModelForm):
+    hp = forms.CharField(label="do not fill", required=False)
+
     class Meta:
         model = Message
         fields = ['sender_name', 'sender_email', 'recipient_name', 'recipient_email', 'message',
@@ -45,7 +47,7 @@ class MessageSendForm(forms.ModelForm):
         self.fields['sender_approved_public_named'].help_text = "Note that we won't publish anything unless the recipient opts in too."
 
         self.helper.layout = Layout(
-            Fieldset('This message is from...', 'sender_name', 'sender_email'),
+            Fieldset('This message is from...', 'sender_name', 'sender_email', 'hp'),
             Fieldset("You're sending some happiness to...", 'recipient_name', 'recipient_email'),
             Fieldset("Your message is...", 'message'),
             Fieldset("Privacy choices", 'sender_named', 'sender_approved_public', 'sender_approved_public_named'),
@@ -55,6 +57,8 @@ class MessageSendForm(forms.ModelForm):
 
     def clean(self):
         super(MessageSendForm, self).clean()
+        if self.cleaned_data.get('hp'):
+            raise forms.ValidationError('')
         if self.cleaned_data.get('sender_approved_public_named') and not self.cleaned_data.get('sender_approved_public'):
             self.add_error('sender_approved_public_named', "If you want us to publish the message including your name, "
                                                            "you must also check 'I'm OK with you publishing this "
