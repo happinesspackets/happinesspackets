@@ -8,13 +8,12 @@
 
     {% if not_found %}
         <div class="alert alert-danger">
-            We couldn't find this message. Make sure you didn't leave part off the end of the link.
+            We couldn't find this message. Make sure that the URL is complete.
         </div>
     {% elif already_confirmed %}
         <div class="alert alert-info">
-            You've already confirmed this message.
+            You already confirmed this message.
         </div>
     {% endif %}
 
 {% endblock content %}
-
