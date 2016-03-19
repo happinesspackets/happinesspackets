@@ -1,6 +1,10 @@
 Hello {{ message.recipient_name }}!
 
-You've just received a happiness packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
+<!-- MA: Not sure what this txt file is for, but it looks like it matches the recipient_mail.html file, so if you 
+are happy with the copy edits in that file, I'd feel more comfortable if you change this file (too many functions and
+I'm worried I'll break something) -->
+
+You've just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
 
 If this is the first time you've heard about Happiness Packets # TODO insert brief
 
@@ -9,7 +13,7 @@ Here's what they wrote:
 {{ message.message }}
 ---------------------
 
-We'd like to be able to publish some of the happiness packets, but we'll
+We'd like to be able to publish some of the Happiness Packets, but we'll
 only do so after opt-in of both you and the sender. To give permission for
 this, please go to:
 {{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}

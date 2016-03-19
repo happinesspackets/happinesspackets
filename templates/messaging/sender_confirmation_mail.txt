@@ -1,6 +1,8 @@
 Hello!
 
-You just submitted a happiness packet for {{ message.recipient_name }}.
+<!-- Same comment as the other txt files, please port copy edits to this one too, thanks!!!! -->
+
+You just submitted a Happiness Packet for {{ message.recipient_name }}.
 To confirm sending your message, just open this link:
 
 {{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}

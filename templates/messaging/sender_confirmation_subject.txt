@@ -1,1 +1,1 @@
-Confirm your message to {{ message.recipient_name }}
+Confirm and send your Happiness Packet to {{ message.recipient_name }}

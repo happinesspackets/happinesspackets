@@ -1,8 +1,7 @@
-Have a great day!
+Have a happy day!
 
-Open-source happiness packets is an open-source project by Erik Romijn
-and Mikey Ariel. Need help? Email us on info@happinesspackets.io.
+Open-Source Happiness Packets is an open-source project by Erik Romijn
+and Mikey Ariel. Need help? Email us at info@happinesspackets.io
 
-Never want to receive email from us again? Blacklist {{ recipient }}:
+Never want to receive email from us again? Block {{ recipient }}:
 {{ protocol }}://{{ domain }}{{ blacklist_url }}
-
