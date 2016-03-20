@@ -4,16 +4,16 @@
 {% block content %}
 
     <div class="page-header">
-        <h2>You got a happiness packet!</h2>
+        <h2>You received an Open-Source Happiness Packet!</h2>
     </div>
 
     <p>
         {% if message.sender_named %}
-            You got a happiness packet from {{ message.sender_name }} ({{ message.sender_email }}).
+            You received a Happiness Packet from {{ message.sender_name }} ({{ message.sender_email }}).
         {% else %}
-            The sender of this message preferred to remain anonymous.
+            The sender of this message asked to remain anonymous.
         {% endif %}
-        They wrote:
+        Your Happiness Packet contains:
         </p>
 
     <blockquote>{{ message.message|linebreaksbr }}</blockquote>

@@ -3,52 +3,48 @@
 {% block content %}
 
     <div class="page-header">
-        <h2>What are open-source happiness packets?</h2>
+        <h2>What are Open-Source Happiness Packets?</h2>
     </div>
 
     <p class="lead">
-        People are generally much loved than they think they are. Especially when things don't go to plan, others
-        almost never think as harsh of you as you might think yourself. It's easy for us to complain when
-        things are bad, but we're often fairly silent when things are good. Open-source communities are no different.
+        People are generally much more loved than they think they are. Especially when things don't go according to
+        plan, other people almost never think as harshly of you as you might think of yourself. It's easy for us to
+        complain when bad things happen, and yet we're often fairly silent when things are good. Open-source communities
+        are no different, especially when our main communication channels are textual and virtual.
     </p>
 
     <p>
-        Feeling like you've made a difference, that your work matters and paid off, and that the people you've done
-        that work with are happy you're part of it, is an awesome feeling. With open-source happiness packets, we're
-        trying to spread that feeling more.
+        The feeling that you made a difference, that your work matters and and has value, and that the people that
+        you work with happy to work with you, is an awesome feeling. With Open-Source Happiness Packets, we're
+        trying to spread that feeling.
     </p>
 
     <p class="text-center">
-        <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness yourself</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness now!</a>
     </p>
 
     <h2>How does it work?</h2>
     <p>
-        Openly expressing appreciation, gratefulness or happiness to other people can be difficult. Especially when you
-        do not know them well. Many of us are not used to a culture in which people are open about such feelings, and
-        quickly feel uncomfortable or creepy sharing them.
+        Openly expressing appreciation, gratitude, or happiness to other people can be difficult. This is especially
+        true when you don't know them very well. Many of us come from cultures in which people are not open by default
+        about such feelings, and naturally feel uncomfortable or even creepy to share them.
     </p>
     <p>
-        Open-source happiness packets is a very simple platform to anonymously approach the people you appreciate or
-        are thankful to in your community. We can pass the message anonymously if you want, to reduce any reluctance.
-        We do encourage you to include your name though.
+        Open-Source Happiness Packets is a very simple platform to anonymously reach out to the people that you
+        appreciate or to whom you are thankful in your open-source community. Your message can be sent anonymously
+        if you feel uncomfortable to share your name with the recipient. Of course, we encourage you to share your name,
+        but it's completely optional!
     </p>
 
-    <h3>Happiness archive</h3>
+    <h3>Happiness Archive</h3>
     <p>
-        If both you and the recipient agree, we can even
-        <a href="{% url 'messaging:archive' %}">publish your message</a> for others to see. That way, we'll
-        be building on an archive of open-source happiness.
-    </p><p>
-        Here's a random message from
-        <a href="{% url 'messaging:archive' %}">our archive</a>:
+        If both the sender and the recipient agree, we can
+        <a href="{% url 'messaging:archive' %}">publish the Happiness Packet</a> on the website.
+        We hope to build an archive of open-source happiness that communities can draw inspiration from.
     </p>
-
-    <h4>From Erik Romijn to Ola Sitarska</h4>
-    <blockquote>{% lorem 1 p random %}</blockquote>
 
     <p class="text-center">
-        <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness now</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness now!</a>
     </p>
 
 {% endblock content %}

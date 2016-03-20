@@ -2,23 +2,25 @@
 
 {% block content %}
 
-<p>Hello!</p>
+<p>Hello {{ message.sender_name }}!</p>
 
 <p>
-    You just submitted a happiness packet for {{ message.recipient_name }}.
-    To confirm sending your message, just open this link:
+    You just requested to send a Happiness Packet to {{ message.recipient_name }}.
+    To confirm and send your message, click or copy this link to a web browser:
 </p>
 
 <p>
-    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}" role="button" style="display: inline-block; background: #F64747;color: white;text-transform: uppercase;padding: 0.9em 1.3em;text-decoration: none;border-radius: 6px">Confirm my message</a>
+    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}" role="button" style="display: inline-block; background: #F64747;color: white;text-transform: uppercase;padding: 0.9em 1.3em;text-decoration: none;border-radius: 6px">Yes! Please send my happiness packet</a>
 </p>
 
 <p>
-    If you've changed your mind, don't open the link, and we won't send the message.
+    Important: The message content cannot be modified after you confirm.
+    If you changed your mind, simply ignore this message and do not follow the link.
+    Your message will be deleted from our database and won't be sent.
 </p>
 
 <p>
-    Thanks for helping us spread some happiness!
+    Thanks for sharing some happiness!
 </p>
 
 {% endblock %}

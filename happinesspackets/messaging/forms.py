@@ -41,16 +41,16 @@ class MessageSendForm(forms.ModelForm):
         self.fields['recipient_email'].label = 'Email'
         self.fields['recipient_email'].validators = [validate_email]
         self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="%s">message inspiration</a>.' % reverse('messaging:inspiration')
-        self.fields['sender_named'].label = 'You can tell the recipient my name and email address.'
-        self.fields['sender_approved_public'].label = "I'm OK with you publishing this message publicly."
-        self.fields['sender_approved_public_named'].label = "...and you can even include our names publicly."
-        self.fields['sender_approved_public_named'].help_text = "Note that we won't publish anything unless the recipient opts in too."
+        self.fields['sender_named'].label = 'I agree to share my name and email address with the recipient.'
+        self.fields['sender_approved_public'].label = "I agree to publish this message and display it publicly in the Happiness Archive."
+        self.fields['sender_approved_public_named'].label = "... and I agree to display our names publicly too."
+        self.fields['sender_approved_public_named'].help_text = "Note: We only publish information if both the sender and the recipients agree."
 
         self.helper.layout = Layout(
-            Fieldset('This message is from...', 'sender_name', 'sender_email', 'hp'),
-            Fieldset("You're sending some happiness to...", 'recipient_name', 'recipient_email'),
+            Fieldset('This Happiness Packet is from...', 'sender_name', 'sender_email', 'hp'),
+            Fieldset("Send this Happiness Packet to...", 'recipient_name', 'recipient_email'),
             Fieldset("Your message is...", 'message'),
-            Fieldset("Privacy choices", 'sender_named', 'sender_approved_public', 'sender_approved_public_named'),
+            Fieldset("Privacy and permissions", 'sender_named', 'sender_approved_public', 'sender_approved_public_named'),
             HTML("<br>"),
             Submit('submit', 'Send some happiness', css_class='btn-lg centered'),
         )
@@ -77,12 +77,12 @@ class MessageRecipientForm(forms.ModelForm):
         self.helper.label_class = 'col-md-3'
         self.helper.field_class = 'col-md-8'
 
-        self.fields['recipient_approved_public'].label = "I'm OK with you publishing this message publicly."
-        self.fields['recipient_approved_public_named'].label = "...and you can even include our names publicly."
-        self.fields['recipient_approved_public_named'].help_text = "Note that we won't publish anything unless the sender opted in too."
+        self.fields['recipient_approved_public'].label = "I agree to publish this message and display it publicly in the Happiness Archive."
+        self.fields['recipient_approved_public_named'].label = "... and I agree to display our names publicly too."
+        self.fields['recipient_approved_public_named'].help_text = "Note: We only publish information if both the sender and the recipients agree."
 
         self.helper.layout = Layout(
-            Fieldset("Privacy choices", 'recipient_approved_public', 'recipient_approved_public_named'),
+            Fieldset("Privacy and permissions", 'recipient_approved_public', 'recipient_approved_public_named'),
             HTML("<br>"),
             Submit('submit', 'Save privacy choices', css_class='btn-lg centered'),
         )

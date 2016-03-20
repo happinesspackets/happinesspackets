@@ -1,13 +1,13 @@
 happinesspackets
 ===============================
 
-Open-source happiness packets.
+Open-source Happiness Packets project
 
-This project was build in quite a hurry, so some of the code may be a bit shoddy. We're happy to take your
-pull requests!
+This project was created for DjangoCon Europe 2016. The structure and format of the site is basic, and
+contributions are welcome!
 
-To run this project or the tests, you'll have to set up a virtualenv, install the dev requirements and set
-the right ``DJANGO_SETTINGS_MODULE``::
+To run this project or the tests, you need to set up a virtualenv, install the dev requirements and set
+the correct ``DJANGO_SETTINGS_MODULE``::
 
     virtualenv --no-site-packages --prompt='(happinesspackets)' virtualenv/
     source virtualenv/bin/activate
@@ -15,15 +15,14 @@ the right ``DJANGO_SETTINGS_MODULE``::
     export DJANGO_SETTINGS_MODULE=happinesspackets.settings.dev
     ./t
 
-The ``t`` command is a very short shell script to run the tests with the right settings and report on coverage.
+The ``t`` command is a very short shell script that runs the tests with the correct settings and reports on coverage.
 
 To run the integration tests::
 
     ./manage.py test -v 2 -p integration_test*.py --settings=happinesspackets.settings.tsting
 
-This repo contains some documentation directly relating to the code, and is built with Sphinx. To build it::
+This repository contains some documentation directly related to the code, built with Sphinx. To build the docs::
 
     cd docs
     make html
     open _build/html/index.html
-

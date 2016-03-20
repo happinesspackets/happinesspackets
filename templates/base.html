@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <title>Open-source happiness packets</title>
+    <title>Open-source Happiness Packets</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,18 +22,18 @@
     <aside>
         <div class="sidebar">
             {% url 'messaging:start' as url %}
-            <a href="{{ url }}"><img src="{% static 'images/logo.png' %}" alt="Open-source happiness packets" class="logo"/></a>
+            <a href="{{ url }}"><img src="{% static 'images/logo.png' %}" alt="Open-Source Happiness Packets" class="logo"/></a>
             <ul class="nav nav-stacked">
                 {% url 'messaging:send' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness</a></li>
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness!</a></li>
                 {% url 'messaging:start' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">What are open-source happiness packets?</a></li>
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">What are Happiness Packets?</a></li>
                 {% url 'messaging:inspiration' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Message inspiration</a></li>
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Get inspired</a></li>
                 {% url 'messaging:faq' as url %}
                 <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
                 {% url 'messaging:archive' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Happiness archive</a></li>
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Happiness Archive</a></li>
             </ul>
         </div>
     </aside>
@@ -55,10 +55,11 @@
                 <a href="https://twitter.com/happinesspacket" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @happinesspacket</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                 <br>
-                Open-source happiness packets is an
+                Open-Source Happiness Packets is an
                 <a href="https://github.com/erikr/happinesspackets/">open-source project</a> by
                 <a href="https://twitter.com/erikpub">Erik Romijn</a> and
                 <a href="https://twitter.com/thatdocslady">Mikey Ariel</a>.
+                <br>
                 Design and artwork by <a href="https://twitter.com/olasitarska">Ola Sitarska</a>.
                 <br>
                 Need help? <a href="mailto:info@happinesspackets.io">info@happinesspackets.io</a>

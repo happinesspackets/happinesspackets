@@ -1,12 +1,13 @@
-Hello!
+Hello {{ message.sender_name }}!
 
-You just submitted a happiness packet for {{ message.recipient_name }}.
-To confirm sending your message, just open this link:
-
+You just requested to send a Happiness Packet to {{ message.recipient_name }}.
+To confirm and send your message, click or copy this link to a web browser:
 {{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}
 
-If you've changed your mind, don't open the link, and we won't send the message.
+Important: The message content cannot be modified after you confirm.
+If you changed your mind, simply ignore this message and do not follow the link.
+Your message will be deleted from our database and won't be sent.
 
-Thanks for helping us spread some happiness!
+Thanks for sharing some happiness!
 
 {% include '_email_footer.txt' %}

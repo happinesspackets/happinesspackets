@@ -3,17 +3,18 @@
 {% block content %}
 
     <div class="page-header">
-        <h2>Blacklist email address</h2>
+        <h2>Block e-mail address</h2>
     </div>
 
     <p>
-        If you don't want us to email you on <em>{{ email }}</em> ever again, confirm by
-        clicking the button below. If anyone tries to send a message using your email as sender
-        or recipient, we'll them we can't send emails to this address.
+        If you don't want to receive e-mail messages to <em>{{ email }}</em> ever again, confirm by
+        clicking the <b>Never email me again</b> button. If anyone tries to use this email address
+        for a sender or recipient, the system notifies them that we cannot send messages to this address.
     </p>
 
     <p>
-        After this, you may still receive some messages that were already underway.
+        You might still receive Happiness Packets that were already sent before you blocked
+        your email address.
     </p>
 
     <form method="post" >{% csrf_token %}
@@ -21,4 +22,3 @@
     </form>
 
 {% endblock content %}
-

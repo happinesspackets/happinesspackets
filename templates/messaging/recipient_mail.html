@@ -5,28 +5,33 @@
 <p>Hello {{ message.recipient_name }}!</p>
 
 <p>
-    You've just received a happiness packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!
+    You just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!
     {% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
 </p>
 
 <p>
-    If this is the first time you've heard about Happiness Packets # TODO insert brief
+    If this is the first time you've heard about Happiness Packets, check out
+    <a href="{{ protocol }}://{{ domain }}/" style="color: #F64747;">our website</a>.
+    In short, Happiness Packets are positivity messages that open-source contributors can send to each other
+    anonymously and confidentially. By sending Happiness Packets, we hope to create an atmosphere where
+    positive feedback is amplified and accepted more than negative feedback.
 </p>
 
-<p>Here's what they wrote:</p>
+<p>Your Happiness Packet contains:</p>
 
 <p><em>{{ message.message|linebreaksbr }}</em></p>
 
 <p>
-    We'd like to be able to publish some of the happiness packets, but we'll
-    only do so after opt-in of both you and the sender.
+    If you and the sender of the Happiness Packet both agree, we'd love to publish the message to our
+    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:archive' %}" style="color: #F64747;">Happiness Archive</a>
+    to inspire others from the community.
 </p>
 
 <p>
-    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}" role="button" style="display: inline-block; background: #F64747;color: white;text-transform: uppercase;padding: 0.9em 1.3em;text-decoration: none;border-radius: 6px">Set permissions for publishing</a>
+    <a href="{{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}" role="button" style="display: inline-block; background: #F64747;color: white;text-transform: uppercase;padding: 0.9em 1.3em;text-decoration: none;border-radius: 6px">Set publishing permissions</a>
 </p>
 
-<p>This is entirely optional.</p>
+<p>This is entirely optional, we respect your privacy and only publish messages if both the sender and recipient agree.</p>
 
-<p>Have a great day!</p>
+<p>Have a happy day!</p>
 {% endblock %}

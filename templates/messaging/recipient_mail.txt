@@ -1,18 +1,28 @@
 Hello {{ message.recipient_name }}!
 
-You've just received a happiness packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
+You've just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!
+{% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
 
-If this is the first time you've heard about Happiness Packets # TODO insert brief
+If this is the first time you've heard about Happiness Packets, check out our website:
+{{ protocol }}://{{ domain }}/
 
-Here's what they wrote:
+In short, Happiness Packets are positivity messages that open-source contributors can send to each other
+anonymously and confidentially. By sending Happiness Packets, we hope to create an atmosphere where
+positive feedback is amplified and accepted more than negative feedback.
+
+Your Happiness Packet contains:
 ---------------------
 {{ message.message }}
 ---------------------
 
-We'd like to be able to publish some of the happiness packets, but we'll
-only do so after opt-in of both you and the sender. To give permission for
-this, please go to:
+If you and the sender of the Happiness Packet both agree, we'd love to publish the message to our
+Happiness Archive to inspire others from the community.
+
+For this, please go to:
 {{ protocol }}://{{ domain }}{% url 'messaging:recipient_message_update' identifier=message.identifier token=message.recipient_email_token %}
-This is entirely optional.
+
+This is entirely optional, we respect your privacy and only publish messages if both the sender and recipient agree.
+
+Have a happy day!
 
 {% include '_email_footer.txt' %}
