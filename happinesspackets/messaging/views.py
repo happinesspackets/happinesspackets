@@ -7,7 +7,9 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from django.utils.crypto import salted_hmac, constant_time_compare
+from django.utils.decorators import method_decorator
 from django.utils.html import format_html
+from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, TemplateView, UpdateView
 
 from .forms import MessageSendForm, MessageRecipientForm
@@ -63,6 +65,7 @@ class MessageSendView(FormView):
     template_name = 'messaging/message_send_form.html'
     form_class = MessageSendForm
 
+    @method_decorator(sensitive_post_parameters('message'))
     def dispatch(self, *args, **kwargs):
         return super(MessageSendView, self).dispatch(*args, **kwargs)
 
