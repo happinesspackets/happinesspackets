@@ -60,9 +60,9 @@ class MessageSendForm(forms.ModelForm):
         if self.cleaned_data.get('hp'):
             raise forms.ValidationError('')
         if self.cleaned_data.get('sender_approved_public_named') and not self.cleaned_data.get('sender_approved_public'):
-            self.add_error('sender_approved_public_named', "If you want us to publish the message including your name, "
-                                                           "you must also check 'I'm OK with you publishing this "
-                                                           "message publicly'")
+            self.add_error('sender_approved_public_named', "If you want us to publish the message including your names, "
+                                                           "you must also check 'I agree to publish this message and"
+                                                           "display it publicly in the Happiness Archive'")
 
 
 class MessageRecipientForm(forms.ModelForm):
@@ -91,5 +91,6 @@ class MessageRecipientForm(forms.ModelForm):
         super(MessageRecipientForm, self).clean()
         if self.cleaned_data.get('recipient_approved_public_named') and not self.cleaned_data.get('recipient_approved_public'):
             self.add_error('recipient_approved_public_named', "If you want us to publish the message including your "
-                                                              "name, you must also check 'I'm OK with you publishing "
-                                                              "this message publicly'")
+                                                              "names, you must also check 'I agree to publish this "
+                                                              "message and display it publicly in the Happiness "
+                                                              "Archive.'")
