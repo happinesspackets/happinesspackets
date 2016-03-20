@@ -41,7 +41,7 @@ SESSION_COOKIE_NAME = "PHPSESSID"
 CSRF_COOKIE_NAME = "JSESSIONID"
 
 ADMIN_ENABLED = False
-DEMO_MODE = False
+
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 MESSAGE_TAGS = {
@@ -61,6 +61,7 @@ STATICFILES_DIRS = (
 # noinspection PyUnresolvedReferences
 MIDDLEWARE_CLASSES = (
     'happinesspackets.utils.middleware.SetRemoteAddrFromForwardedFor',
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'dogslow.WatchdogMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,6 +111,7 @@ INSTALLED_APPS = (
 
     'django_extensions',
     'crispy_forms',
+    'opbeat.contrib.django',
 
     'happinesspackets.messaging',
 )
