@@ -69,8 +69,8 @@ class Message(TimeStampedModel):
         self.save()
 
     def send_to_recipient(self, use_https, domain):
-        blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.sender_email).hexdigest()
-        blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.sender_email, 'digest': blacklist_digest})
+        blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.recipient_email).hexdigest()
+        blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.recipient_email, 'digest': blacklist_digest})
         self.recipient_email_token = readable_random_token(alphanumeric=True)
         self.status = Message.STATUS.sent
         context = {

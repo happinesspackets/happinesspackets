@@ -141,6 +141,7 @@ class MessageSenderConfirmationView(TestCase):
         self.assertEqual(self.message.status, Message.STATUS.sent)
         self.assertEqual(mail.outbox[0].recipients(), [self.message.recipient_email])
         self.assertFalse(self.message.sender_name in mail.outbox[0].body)
+        self.assertFalse(self.message.sender_email in mail.outbox[0].body)
         self.assertTrue(self.message.identifier in mail.outbox[0].body)
         self.assertTrue(self.message.recipient_email_token in mail.outbox[0].body)
 
