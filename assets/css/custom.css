@@ -147,3 +147,9 @@ blockquote {
         min-height: 500px;
     }
 }
+
+@media (min-width: 1530px) {
+    blockquote {
+        min-height: 170px;
+    }
+}
