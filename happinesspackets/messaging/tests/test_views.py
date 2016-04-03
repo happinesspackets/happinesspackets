@@ -109,12 +109,11 @@ class SendViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['form'].errors), 1)
 
-    def test_post_invalid_blacklisted(self):
+    def test_post_blacklisted_sender(self):
         BlacklistedEmailFactory(email='sender@erik.io', stripped_email='sender@erikio')
-        BlacklistedEmailFactory(email=self.post_data['recipient_email'], stripped_email='recipient@erikio')
         response = self.client.post(self.url, self.post_data)
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['form'].errors), 2)
+        self.assertRedirects(response, reverse('messaging:sender_confirmation_sent'))
+        self.assertEqual(len(mail.outbox), 0)
 
 
 class MessageSentViewTest(TestCase):
@@ -174,6 +173,12 @@ class MessageSenderConfirmationView(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context['already_confirmed'])
+
+    def test_confirm_blacklisted_recipient(self):
+        BlacklistedEmailFactory(email='recipient@erik.io', stripped_email='recipientrecipient@null')
+        response = self.client.get(self.url)
+        self.assertRedirects(response, reverse('messaging:sender_confirmed'))
+        self.assertEqual(len(mail.outbox), 0)
 
 
 class MessageSenderConfirmedView(TestCase):

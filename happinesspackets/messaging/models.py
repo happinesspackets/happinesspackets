@@ -52,6 +52,10 @@ class Message(TimeStampedModel):
         return super(Message, self).save(force_insert, force_update, using, update_fields)
 
     def send_sender_confirmation(self, use_https, domain):
+        stripped_email = BlacklistedEmail.strip_email(self.sender_email)
+        if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
+            return
+
         blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.sender_email).hexdigest()
         blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.sender_email, 'digest': blacklist_digest})
         self.sender_email_token = readable_random_token(alphanumeric=True)
@@ -70,6 +74,10 @@ class Message(TimeStampedModel):
         self.save()
 
     def send_to_recipient(self, use_https, domain):
+        stripped_email = BlacklistedEmail.strip_email(self.recipient_email)
+        if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
+            return
+
         blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.recipient_email).hexdigest()
         blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.recipient_email, 'digest': blacklist_digest})
         self.recipient_email_token = readable_random_token(alphanumeric=True)

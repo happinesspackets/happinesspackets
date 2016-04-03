@@ -8,15 +8,9 @@ from crispy_forms.layout import Submit, Layout, Fieldset, HTML
 from django import forms
 from django.core.urlresolvers import reverse
 
-from .models import Message, BlacklistedEmail
+from .models import Message
 
 logger = logging.getLogger(__name__)
-
-
-def validate_email(email):
-    stripped_email = BlacklistedEmail.strip_email(email)
-    if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
-        raise forms.ValidationError("We can't send emails to this address.")
 
 
 class MessageSendForm(forms.ModelForm):
@@ -37,10 +31,8 @@ class MessageSendForm(forms.ModelForm):
         self.fields['sender_name'].label = 'Name'
         self.fields['sender_email'].label = 'Email'
         self.fields['sender_email'].help_text = "We'll send you a confirmation link before sending your message out."
-        self.fields['sender_email'].validators = [validate_email]
         self.fields['recipient_name'].label = 'Name'
         self.fields['recipient_email'].label = 'Email'
-        self.fields['recipient_email'].validators = [validate_email]
         self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="%s">message inspiration</a>.' % reverse('messaging:inspiration')
         self.fields['sender_named'].label = 'I agree to share my name and email address with the recipient.'
         self.fields['sender_approved_public'].label = "I agree to publish this message and display it publicly in the Happiness Archive."
