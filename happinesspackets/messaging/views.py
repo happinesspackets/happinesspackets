@@ -55,7 +55,8 @@ class BlacklistEmailView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         email = self.get_email()
-        BlacklistedEmail.objects.create(email=email, confirmation_ip=self.request.META['REMOTE_ADDR'])
+        stripped_email = BlacklistedEmail.strip_email(email)
+        BlacklistedEmail.objects.create(email=email, stripped_email=stripped_email, confirmation_ip=self.request.META['REMOTE_ADDR'])
         message = format_html("We've blacklisted your address and will never email <em>{0}</em> again. Sorry to have bothered you!", email)
         messages.success(self.request, message)
         return HttpResponseRedirect(self.success_url)

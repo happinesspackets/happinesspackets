@@ -12,7 +12,7 @@ class MessageModelFactory(factory.DjangoModelFactory):
     sender_name = 'Sender sender'
     sender_email = 'sendersender@null'
     recipient_name = 'Recipient recipient'
-    recipient_email = 'recipientrecipient@null'
+    recipient_email = 'recipientrecipient+foo@null'
     sender_ip = '127.0.0.1'
 
 

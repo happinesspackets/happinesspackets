@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 
 
 def validate_email(email):
-    if BlacklistedEmail.objects.filter(email=email).count():
+    stripped_email = BlacklistedEmail.strip_email(email)
+    if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
         raise forms.ValidationError("We can't send emails to this address.")
 
 

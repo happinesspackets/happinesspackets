@@ -26,7 +26,15 @@ CSRF_COOKIE_SECURE = False
 
 ADMIN_ENABLED = True
 
-MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
+MIDDLEWARE_CLASSES = [
+    'happinesspackets.utils.middleware.SetRemoteAddrFromForwardedFor',
+    'dogslow.WatchdogMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
 
 INSTALLED_APPS += (
     'debug_toolbar',

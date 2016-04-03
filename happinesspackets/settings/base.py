@@ -59,7 +59,7 @@ STATICFILES_DIRS = (
 )
 
 # noinspection PyUnresolvedReferences
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'happinesspackets.utils.middleware.SetRemoteAddrFromForwardedFor',
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'dogslow.WatchdogMiddleware',
@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+]
 
 ROOT_URLCONF = 'happinesspackets.urls'
 

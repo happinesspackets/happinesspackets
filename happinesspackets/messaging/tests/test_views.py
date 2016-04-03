@@ -60,6 +60,7 @@ class BlacklistViewTest(TestCase):
         self.assertRedirects(response, reverse('messaging:start'))
         obj = BlacklistedEmail.objects.get()
         self.assertEqual(obj.email, self.message.recipient_email)
+        self.assertEqual(obj.stripped_email, 'recipientrecipient@null')
 
     def test_validates_digest(self):
         self.url_kwargs['email'] = self.message.sender_email
@@ -78,7 +79,7 @@ class SendViewTest(TestCase):
         super(SendViewTest, self).setUp()
         self.post_data = {
             'sender_name': 'sender name',
-            'sender_email': 'sender@erik.io',
+            'sender_email': 'SEN.DER+FOOBAR@erik.io',
             'recipient_name': 'recipient name',
             'recipient_email': 'recipient@erik.io',
             'message': 'message',
@@ -109,8 +110,8 @@ class SendViewTest(TestCase):
         self.assertEqual(len(response.context['form'].errors), 1)
 
     def test_post_invalid_blacklisted(self):
-        BlacklistedEmailFactory(email=self.post_data['sender_email'])
-        BlacklistedEmailFactory(email=self.post_data['recipient_email'])
+        BlacklistedEmailFactory(email='sender@erik.io', stripped_email='sender@erikio')
+        BlacklistedEmailFactory(email=self.post_data['recipient_email'], stripped_email='recipient@erikio')
         response = self.client.post(self.url, self.post_data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['form'].errors), 2)

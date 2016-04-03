@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import logging
+import re
 
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -90,4 +91,9 @@ class Message(TimeStampedModel):
 
 class BlacklistedEmail(TimeStampedModel):
     email = models.EmailField()
+    stripped_email = models.CharField(max_length=255)
     confirmation_ip = models.GenericIPAddressField()
+
+    @classmethod
+    def strip_email(cls, email):
+        return re.sub('[^@\w]', '', re.sub('\+\w+', '', email.lower()))
