@@ -5,7 +5,7 @@
 <p>Hello {{ message.recipient_name }}!</p>
 
 <p>
-    You just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!
+    You just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }} ({{ message.sender_email }}){% endif %}!
     {% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
 </p>
 

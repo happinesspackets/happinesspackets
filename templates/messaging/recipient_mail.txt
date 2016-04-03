@@ -1,6 +1,6 @@
 Hello {{ message.recipient_name }}!
 
-You've just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }}{% endif %}!
+You've just received a Happiness Packet{% if message.sender_named %} from {{ message.sender_name }} ({{ message.sender_email }}){% endif %}!
 {% if not message.sender_named %}The sender asked to remain anonymous.{% endif %}
 
 If this is the first time you've heard about Happiness Packets, check out our website:
