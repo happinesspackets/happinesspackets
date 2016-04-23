@@ -20,6 +20,8 @@ DATABASES = {
     }
 }
 
+INSTALLED_APPS.append('opbeat.contrib.django')
+
 TEMPLATES[0]['OPTIONS']['loaders'] = (
     ('django.template.loaders.cached.Loader', (
         'django.template.loaders.filesystem.Loader',

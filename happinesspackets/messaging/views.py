@@ -13,7 +13,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, TemplateView, UpdateView
 
 from .forms import MessageSendForm, MessageRecipientForm
-from .models import Message, BLACKLIST_HMAC_SALT, BlacklistedEmail
+from .models import Message, BLACKLIST_HMAC_SALT, BlacklistedEmail, strip_email
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +55,7 @@ class BlacklistEmailView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         email = self.get_email()
-        stripped_email = BlacklistedEmail.strip_email(email)
+        stripped_email = strip_email(email)
         BlacklistedEmail.objects.create(email=email, stripped_email=stripped_email, confirmation_ip=self.request.META['REMOTE_ADDR'])
         message = format_html("We've blacklisted your address and will never email <em>{0}</em> again. Sorry to have bothered you!", email)
         messages.success(self.request, message)

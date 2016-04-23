@@ -41,7 +41,7 @@ SESSION_COOKIE_NAME = "PHPSESSID"
 CSRF_COOKIE_NAME = "JSESSIONID"
 
 ADMIN_ENABLED = False
-
+MAX_MESSAGES = 20
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 MESSAGE_TAGS = {
@@ -99,7 +99,7 @@ TEMPLATES = [
     },
 ]
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -111,10 +111,8 @@ INSTALLED_APPS = (
 
     'django_extensions',
     'crispy_forms',
-    'opbeat.contrib.django',
-
     'happinesspackets.messaging',
-)
+]
 
 
 LOGGING = {

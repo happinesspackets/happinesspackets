@@ -29,11 +29,13 @@ class Message(TimeStampedModel):
 
     sender_name = models.CharField(max_length=255)
     sender_email = models.EmailField()
+    sender_email_stripped = models.CharField(max_length=255)
     sender_email_token = models.CharField(max_length=255, db_index=True)
     sender_ip = models.GenericIPAddressField()
 
     recipient_name = models.CharField(max_length=255)
     recipient_email = models.EmailField()
+    recipient_email_stripped = models.CharField(max_length=255)
     recipient_email_token = models.CharField(max_length=255, db_index=True)
 
     message = models.TextField()
@@ -45,6 +47,8 @@ class Message(TimeStampedModel):
     recipient_approved_public_named = models.BooleanField(default=False)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.sender_email_stripped = strip_email(self.sender_email)
+        self.recipient_email_stripped = strip_email(self.recipient_email)
         if not self.pk or force_insert:
             self.identifier = readable_random_token(alphanumeric=True)
             while Message.objects.filter(identifier=self.identifier).count():
@@ -52,7 +56,7 @@ class Message(TimeStampedModel):
         return super(Message, self).save(force_insert, force_update, using, update_fields)
 
     def send_sender_confirmation(self, use_https, domain):
-        stripped_email = BlacklistedEmail.strip_email(self.sender_email)
+        stripped_email = strip_email(self.sender_email)
         if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
             return
 
@@ -74,7 +78,7 @@ class Message(TimeStampedModel):
         self.save()
 
     def send_to_recipient(self, use_https, domain):
-        stripped_email = BlacklistedEmail.strip_email(self.recipient_email)
+        stripped_email = strip_email(self.recipient_email)
         if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
             return
 
@@ -102,6 +106,6 @@ class BlacklistedEmail(TimeStampedModel):
     stripped_email = models.CharField(max_length=255)
     confirmation_ip = models.GenericIPAddressField()
 
-    @classmethod
-    def strip_email(cls, email):
-        return re.sub('[^@\w]', '', re.sub('\+\w+', '', email.lower()))
+
+def strip_email(email):
+    return re.sub('[^@\w]', '', re.sub('\+\w+', '', email.lower()))

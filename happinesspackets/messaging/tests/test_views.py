@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
@@ -108,11 +109,28 @@ class SendViewTest(TestCase):
         response = self.client.post(self.url, self.post_data)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context['form'].errors), 1)
+        self.assertEqual(len(mail.outbox), 0)
 
     def test_post_blacklisted_sender(self):
         BlacklistedEmailFactory(email='sender@erik.io', stripped_email='sender@erikio')
         response = self.client.post(self.url, self.post_data)
         self.assertRedirects(response, reverse('messaging:sender_confirmation_sent'))
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_post_ratelimited_sender(self):
+        for i in range(settings.MAX_MESSAGES + 1):
+            MessageModelFactory(sender_email='sender@erik.io', sender_email_stripped='sender@erikio')
+        response = self.client.post(self.url, self.post_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['form'].errors), 1)
+        self.assertEqual(len(mail.outbox), 0)
+
+    def test_post_ratelimited_recipient(self):
+        for i in range(settings.MAX_MESSAGES + 1):
+            MessageModelFactory(recipient_email='sender@erik.io', recipient_email_stripped='recipient@erikio')
+        response = self.client.post(self.url, self.post_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['form'].errors), 1)
         self.assertEqual(len(mail.outbox), 0)
 
 
