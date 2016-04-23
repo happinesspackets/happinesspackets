@@ -15,8 +15,19 @@ class StartViewTest(TestCase):
     url = reverse('messaging:start')
 
     def test_renders(self):
+        MessageModelFactory(sender_approved_public=True, sender_approved_public_named=False,
+                            recipient_approved_public=True, recipient_approved_public_named=True,
+                            admin_approved_public=True)
+        msg = MessageModelFactory(sender_approved_public=True, sender_approved_public_named=True,
+                                  recipient_approved_public=True, recipient_approved_public_named=False,
+                                  admin_approved_public=True)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, msg.sender_name)
+        self.assertNotContains(response, msg.recipient_name)
+        self.assertContains(response, msg.message)
+        self.assertNotContains(response, msg.sender_email)
+        self.assertNotContains(response, msg.recipient_email)
 
 
 class FaqViewTest(TestCase):
@@ -38,9 +49,46 @@ class InspirationViewTest(TestCase):
 class ArchiveViewTest(TestCase):
     url = reverse('messaging:archive')
 
-    def test_renders(self):
+    def test_renders_no_public_messages(self):
+        MessageModelFactory(sender_approved_public=True, sender_approved_public_named=True,
+                            recipient_approved_public=True, recipient_approved_public_named=True,
+                            admin_approved_public=False)
+        MessageModelFactory(sender_approved_public=False, sender_approved_public_named=True,
+                            recipient_approved_public=True, recipient_approved_public_named=True,
+                            admin_approved_public=True)
+        MessageModelFactory(sender_approved_public=True, sender_approved_public_named=True,
+                            recipient_approved_public=False, recipient_approved_public_named=True,
+                            admin_approved_public=True)
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+        self.assertFalse(response.context['message_list'].count())
+
+    def test_renders_named_messages(self):
+        msg = MessageModelFactory(sender_approved_public=True, sender_approved_public_named=True,
+                                  recipient_approved_public=True, recipient_approved_public_named=True,
+                                  admin_approved_public=True)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, msg.sender_name)
+        self.assertContains(response, msg.recipient_name)
+        self.assertContains(response, msg.message)
+        self.assertNotContains(response, msg.sender_email)
+        self.assertNotContains(response, msg.recipient_email)
+
+    def test_renders_unnamed_messages(self):
+        MessageModelFactory(sender_approved_public=True, sender_approved_public_named=False,
+                            recipient_approved_public=True, recipient_approved_public_named=True,
+                            admin_approved_public=True)
+        msg = MessageModelFactory(sender_approved_public=True, sender_approved_public_named=True,
+                                  recipient_approved_public=True, recipient_approved_public_named=False,
+                                  admin_approved_public=True)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, msg.sender_name)
+        self.assertNotContains(response, msg.recipient_name)
+        self.assertContains(response, msg.message)
+        self.assertNotContains(response, msg.sender_email)
+        self.assertNotContains(response, msg.recipient_email)
 
 
 class BlacklistViewTest(TestCase):

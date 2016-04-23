@@ -1,0 +1,12 @@
+{% for message in message_list %}
+    <h4>
+        {% if message.sender_approved_public_named and message.recipient_approved_public_named %}
+            From {{ message.sender_name }} to {{ message.recipient_name }}
+        {% else %}
+            Anonymous message
+        {% endif %}
+    </h4>
+    <blockquote>
+        {{ message.message|linebreaksbr }}
+    </blockquote>
+{% endfor %}

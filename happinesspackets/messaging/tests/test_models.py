@@ -14,6 +14,7 @@ class MessageModelFactory(factory.DjangoModelFactory):
     recipient_name = 'Recipient recipient'
     recipient_email = 'recipientrecipient+foo@null'
     sender_ip = '127.0.0.1'
+    message = 'message content'
 
 
 class BlacklistedEmailFactory(factory.DjangoModelFactory):

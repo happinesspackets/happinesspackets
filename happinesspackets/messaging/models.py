@@ -46,6 +46,11 @@ class Message(TimeStampedModel):
     recipient_approved_public = models.BooleanField(default=False)
     recipient_approved_public_named = models.BooleanField(default=False)
 
+    admin_approved_public = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-created']
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.sender_email_stripped = strip_email(self.sender_email)
         self.recipient_email_stripped = strip_email(self.recipient_email)

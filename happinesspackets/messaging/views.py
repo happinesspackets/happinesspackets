@@ -10,7 +10,7 @@ from django.utils.crypto import salted_hmac, constant_time_compare
 from django.utils.decorators import method_decorator
 from django.utils.html import format_html
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import FormView, TemplateView, UpdateView
+from django.views.generic import FormView, TemplateView, UpdateView, ListView
 
 from .forms import MessageSendForm, MessageRecipientForm
 from .models import Message, BLACKLIST_HMAC_SALT, BlacklistedEmail, strip_email
@@ -18,15 +18,26 @@ from .models import Message, BLACKLIST_HMAC_SALT, BlacklistedEmail, strip_email
 logger = logging.getLogger(__name__)
 
 
-class StartView(TemplateView):
+class ArchiveListView(ListView):
+    model = Message
+
+    def get_queryset(self):
+        queryset = super(ArchiveListView, self).get_queryset()
+        return queryset.filter(sender_approved_public=True, recipient_approved_public=True, admin_approved_public=True)
+
+
+class StartView(ArchiveListView):
     template_name = 'messaging/start.html'
+
+    def get_queryset(self):
+        return super(StartView, self).get_queryset().order_by('?')[:2]
 
 
 class FaqView(TemplateView):
     template_name = 'messaging/faq.html'
 
 
-class ArchiveView(TemplateView):
+class ArchiveView(ArchiveListView):
     template_name = 'messaging/archive.html'
 
 

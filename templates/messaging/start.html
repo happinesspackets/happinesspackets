@@ -41,7 +41,11 @@
         If both the sender and the recipient agree, we can
         <a href="{% url 'messaging:archive' %}">publish the Happiness Packet</a> on the website.
         We hope to build an archive of open-source happiness that communities can draw inspiration from.
+    </p><p>
+        As an example, here are two random messages from our archive:
     </p>
+
+    {% include 'messaging/_message_list.html' %}
 
     <p class="text-center">
         <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness now!</a>
