@@ -1,6 +1,13 @@
 Hello {{ message.sender_name }}!
 
 You just requested to send a Happiness Packet to {{ message.recipient_name }}.
+
+Your message reads: 
+
+---------------------
+{{ message.message }}
+---------------------
+
 To confirm and send your message, click or copy this link to a web browser:
 {{ protocol }}://{{ domain }}{% url 'messaging:sender_confirm' identifier=message.identifier token=message.sender_email_token %}
 
