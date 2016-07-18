@@ -153,3 +153,7 @@ blockquote {
         min-height: 170px;
     }
 }
+
+.emoji { 
+    vertical-align: initial;  
+}
