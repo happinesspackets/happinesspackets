@@ -12,7 +12,7 @@ BASE_DIR = PROJECT_DIR
 DEBUG = False
 
 ADMINS = (
-    ('Erik Romijn', 'github@erik.io'),
+    ('Sasha Romijn', 'github@mxsasha.eu'),
 )
 SERVER_EMAIL = ADMINS[0][1]
 

@@ -1,6 +1,6 @@
 Have a happy day!
 
-Open-Source Happiness Packets is an open-source project by Erik Romijn
+Open-Source Happiness Packets is an open-source project by Sasha Romijn
 and Mikey Ariel. Need help? Email us at info@happinesspackets.io
 
 Never want to receive email from us again? Block {{ recipient }}:
