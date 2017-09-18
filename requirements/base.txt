@@ -30,5 +30,5 @@ pep8==1.7.0
 
 # Misc
 python-dateutil==2.5.0
-factory-boy==2.6.1
+factory-boy==2.9.2
 opbeat==3.3
