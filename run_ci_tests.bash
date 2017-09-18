@@ -2,7 +2,6 @@
 # This is a simple script to run our integration tests in parallel on CircleCI. This will be called from circle.yml.
 # At this time, the script only works for having two nodes.
 
-export DB_NAME="circle_test_"$CIRCLE_NODE_INDEX
 ret=0
 
 case $CIRCLE_NODE_INDEX in
