@@ -41,10 +41,6 @@ class ArchiveView(ArchiveListView):
     template_name = 'messaging/archive.html'
 
 
-class InspirationView(TemplateView):
-    template_name = 'messaging/inspiration.html'
-
-
 class BlacklistEmail(object):
     pass
 

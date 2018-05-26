@@ -47,7 +47,7 @@ class MessageSendForm(forms.ModelForm):
         self.fields['recipient_name'].label = 'Name'
         self.fields['recipient_email'].label = 'Email'
         self.fields['recipient_email'].validators = [validate_email]
-        self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="%s">message inspiration</a>.' % reverse('messaging:inspiration')
+        self.fields['message'].help_text = 'Writer\'s block? Check out our <a href="%s">happiness archive</a>.' % reverse('messaging:archive')
         self.fields['sender_named'].label = 'I agree to share my name and email address with the recipient.'
         self.fields['sender_approved_public'].label = "I agree to publish this message and display it publicly in the Happiness Archive."
         self.fields['sender_approved_public_named'].label = "... and I agree to display our names publicly too."

@@ -28,8 +28,6 @@
                 <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness!</a></li>
                 {% url 'messaging:start' as url %}
                 <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">What are Happiness Packets?</a></li>
-                {% url 'messaging:inspiration' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Get inspired</a></li>
                 {% url 'messaging:faq' as url %}
                 <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
                 {% url 'messaging:archive' as url %}
