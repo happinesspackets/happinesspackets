@@ -1,41 +1,48 @@
 Open-source Happiness Packets
 =============================
 
-The Open-Source Happiness Packets project was created by `Sasha
-Romijn <https://twitter.com/mxsash>`__ and `Mikey
-Ariel <https://twitter.com/thatdocslady>`__ in March 2016. The idea came
-about while we were building our `Healthy Minds in a Healthy
-Community <https://github.com/erikr/well-being/>`__ presentation for
-`Djangocon Europe 2016 <https://2016.djangocon.eu/speakers/13>`__. One
-of the issues we wanted to address in the presentation was that many
+*******************
+Goal of the Project
+*******************  
+Fedora Happiness Packet is a initiative that will help people or specially
+fedora open source developers to acknowledge their contributions.There are many 
 people are unaware of how loved, appreciated, or admired they are by
-their peers, since our culture seems to discourage positive feedback and
-amplify negative feedback. With this project, we wanted to provide a
-platform for people to send positive feedback, thanks, or just a kind
-word to their peers, with hope to make it easier and more acceptable for
-people to spread happiness, gratitude and appreciation in open-source
-communities.
+their peers. With this project, we are trying to create a friendly tool for people
+to send positive feedback, thanks, or just a kind word to their peers, which people 
+will love to use.
 
-The structure and format of the site is basic, and contributions are
-welcome!
+Want to make some changes or implement your own ideas in this project? This is an 
+open source project. We will be very happy if yo do some changes and share your ideas!
 
-To run this project or the tests, you need to set up a virtualenv, install the dev requirements and set
-the correct ``DJANGO_SETTINGS_MODULE``, for example with::
 
-    virtualenv --no-site-packages --prompt='(happinesspackets)' virtualenv/
-    source virtualenv/bin/activate
-    pip install -r requirements/dev.txt
-    export DJANGO_SETTINGS_MODULE=happinesspackets.settings.dev
-    ./t
+Requirements
+************
+1. set up a virtualenv
+2. install the dev requirements and set
+   the correct ``DJANGO_SETTINGS_MODULE``, for example with::
 
-The ``t`` command is a very short shell script that runs the tests with the correct settings and reports on coverage.
+        virtualenv --no-site-packages --prompt='(happinesspackets)' virtualenv/
+        source virtualenv/bin/activate
+        pip install -r requirements/dev.txt
+        export DJANGO_SETTINGS_MODULE=happinesspackets.settings.dev
+        ./t
 
-To run the integration tests::
+    The ``t`` command is a very short shell script that runs the tests with the correct settings and reports on coverage.
 
-    ./manage.py test -v 2 -p integration_test*.py --settings=happinesspackets.settings.tsting
+3. run the integration tests::
 
-This repository contains some documentation directly related to the code, built with Sphinx. To build the docs::
+        ./manage.py test -v 2 -p integration_test*.py --settings=happinesspackets.settings.tsting
 
-    cd docs
-    make html
-    open _build/html/index.html
+
+For GSoC 2018 Applicants
+************************
+
+Skills you need
+---------------
+1. Python 
+2. HTML/CSS/JS 
+3. UI UX skills graphic design
+4. knowledge of fedmsg optional: Cloud / Ansible,
+
+https://docs.fedoraproject.org/mentored-projects/gsoc/2018/ideas.html#fedora-packets-fedora-happiness-packets
+Go to this link and you will find the Informations about the Happiness packets project and other requirements.
