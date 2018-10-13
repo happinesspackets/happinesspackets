@@ -13,7 +13,7 @@ Unipath==1.1          # Better path handling
 wsgiref==0.1.2        # ???
 pytz==2015.7          # Timezone data
 ipython==4.1.1        # Prettier python prompt
-gnureadline==6.3.3    # Dependency of ipython
+gnureadline==6.3.8    # Dependency of ipython
 
 # For generating docs - sphinx and dependencies
 Sphinx==1.3.6
