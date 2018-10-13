@@ -40,6 +40,8 @@ class FaqView(TemplateView):
 class ArchiveView(ArchiveListView):
     template_name = 'messaging/archive.html'
 
+class ArchiveLoadMoreView(ArchiveListView):
+    template_name = 'messaging/_message_list_more_content.html'
 
 class BlacklistEmail(object):
     pass

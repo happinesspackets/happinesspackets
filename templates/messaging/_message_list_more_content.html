@@ -1,5 +1,5 @@
 {% for message in message_list %}
-    {% if forloop.counter <= 4 %}
+    {% if forloop.counter > 4 %}
     <h4>
         {% if message.sender_approved_public_named and message.recipient_approved_public_named %}
             From {{ message.sender_name }} to {{ message.recipient_name }}
@@ -12,13 +12,3 @@
     </blockquote>
     {% endif %}
 {% endfor %}
-
-{% if message_list|length > 4 %}
-<div class="text-center">
-    <button class="btn btn-load-more" id="archive_load_more">Load More</button>
-</div>
-
-<div id="archive_more_content"></div>
-{% endif %}
-
-
