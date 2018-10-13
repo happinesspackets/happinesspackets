@@ -5,3 +5,4 @@ django-debug-toolbar==1.4
 mock==1.3.0
 selenium==2.52
 sqlparse==0.1.18  # Dependency of debug-toolbar
+celery==4.2
