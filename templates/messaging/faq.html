@@ -1,91 +1,223 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div id="faq">
-    <div class="page-header">
-        <h2>Frequently Asked Questions</h2>
-    </div>
 
-    <h3>Who made this and why?</h3>
-    <p>
-        The Open-Source Happiness Packets project was created by <a href="https://twitter.com/mxsash">Sasha Romijn</a> and
-        <a href="https://twitter.com/thatdocslady">Mikey Ariel</a> in March 2016.
-        The idea came about while we were building our
-        <a href="https://2016.djangocon.eu/speakers/13">Healthy Minds in a Healthy Community</a> presentation
-        for Djangocon Europe 2016. One of the issues we wanted to address in the presentation was that many
-        people are unaware of how loved, appreciated, or admired they are by their peers, since our culture seems
-        to discourage positive feedback and amplify negative feedback. With this project, we wanted to provide a platform
-        for people to send positive feedback, thanks, or just a kind word to their peers, with hope to make it
-        easier and more acceptable for people to spread happiness, gratitude and appreciation in open-source communities.
-    </p>
 
-    <h3>Isn't it weird to send these notes to other people?</h3>
-    <p>
-        Many of us come from a culture where it's sometimes more acceptable to complain about the negative than to
-        acknowledge the positive things. Therefore, it might feel a little awkward to communicate positive feedback
-        directly to others. However, in our personal experience, once you take that first step, any awkwardness
-        is quickly replaced by feeling good about helping someone else feel good.
-    </p>
 
-    <h3>Can I send anything I want?</h3>
-    <p>
-        We don't screen the content of messages. However, all messages must meet the
-        <a href="https://www.djangoproject.com/conduct/">Django Project Code of Conduct</a>.
-        Notably, harassment, insults and other exclusionary behavior are never acceptable.
-    </p>
-    <p>
-        Violations of this can result in blocking you from using the service. Your message might also be shared with
-        the Django Code of Conduct committee, who reserve the right to take further action of their own. If you're a member
-        of another open-source community, your message might be shared with any code of conduct committee or similar group
-        from that community.
-    </p>
+<link rel="shortcut icon" type="image/png" href=""/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href=""/>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <h3>Should I reply when I get a Happiness Packet from someone?</h3>
-    <p>
-        You are under no obligation to respond to the sender of the Happiness Packet. But if you are inspired by what
-        you received, you are welcome to respond or send your own Happiness Packet. We always encourage sending more
-        messages, but only if they are sincere.
-    </p>
-    <p>
-        Note: if the sender selected to remain anonymous, you cannot reply to their message.
-    </p>
 
-    <h3>Are my Happiness Packets private?</h3>
-    <p>
-        By default, we only send your message with the recipient. They will get an e-mail with your message
-        and can view it online. We only share your name and email address with the recipient if you choose this option.
-        We may analyse messages and their metadata for statistical analysis.
-    </p>
-    <p>
-        In case of suspected abuse or Code of Conduct violations, the service administrators might view and read
-        your message to determine further processing.
-    </p>
 
-    <h3>What happens if I choose to display my message publicly?</h3>
-    <p>
-        If both the sender and the recipient of the message agree to publish the message on the website,
-        the message will be displayed in the <a href="{% url 'messaging:archive' %}">Happiness Archive</a>.
-        We encourage you to share your messages with the community,
-        but the choice is yours and you are not obligated to choose this option if you do not feel comfortable with it.
-        You can also choose to publish the message but keep the sender and recipient names private.
-    </p>
-    <p>
-        Note: we cannot modify the content of the message after it is sent, so if the message includes personally-identifying
-        information or references to third parties, they will be published even if you choose to hide the sender and
-        recipient names.
-    </p>
+<h2>Frequently Asked Questions</h2>
 
-    <h3>I received an abusive message, what should I do?</h3>
-    <p>
-        Please report this to <a href="mailto:info@happinesspackets.io">info@happinesspackets.io</a>, preferably by
-        forwarding the original email that contains the message.
-    </p>
+<details open>
+  <summary><h3>Who made this and why?</h3></summary>
+  <h5> The Open-Source Happiness Packets project was created by <a href="https://twitter.com/mxsash">Sasha Romijn</a>
+       and
+          <a href="https://twitter.com/thatdocslady">Mikey Ariel</a> in March 2016.
+          The idea came about while we were building our
+          <a href="https://2016.djangocon.eu/speakers/13">Healthy Minds in a Healthy Community</a> presentation
+          for Djangocon Europe 2016. One of the issues we wanted to address in the presentation was that many
+          people are unaware of how loved, appreciated, or admired they are by their peers, since our culture seems
+          to discourage positive feedback and amplify negative feedback. With this project, we wanted to provide a platform
+          for people to send positive feedback, thanks, or just a kind word to their peers, with hope to make it
+          easier and more acceptable for people to spread happiness, gratitude and appreciation in open-source
+       communities.</h5>
+</details>
+<details>
+  <summary><h3>Isn't it weird to send these notes to other people?</h3>
+</summary>
+  <h5>   Many of us come from a culture where it's sometimes more acceptable to complain about the negative than to
+      acknowledge the positive things. Therefore, it might feel a little awkward to communicate positive feedback
+      directly to others. However, in our personal experience, once you take that first step, any awkwardness
+      is quickly replaced by feeling good about helping someone else feel good.</h5>
+</details>
 
-    <h3>I don't want to receive any email from you</h3>
-    <p>
-        Every email we sent includes a link to stop receiving all future e-mail messages. If you follow the link
-        and confirm, your email address will not be able to be used anywhere on the site.
-        Note: if you select to block your email address, you will not be able to send Happiness Packets yourself.
-    </p>
-</div>
+<details>
+  <summary><h3>Can I send anything I want?</h3>
+</summary>
+  <h5>        We don't screen the content of messages. However, all messages must meet the
+          <a href="https://www.djangoproject.com/conduct/">Django Project Code of Conduct</a>.
+          Notably, harassment, insults and other exclusionary behavior are never acceptable</h5>
+</details>
+
+<details>
+  <summary><h3>Should I reply when I get a Happiness Packet from someone?</h3>
+</summary>
+  <h5>        You are under no obligation to respond to the sender of the Happiness Packet. But if you are inspired by
+             what you received, you are welcome to respond or send your own Happiness Packet. We always encourage sending more messages, but only if they are sincere.
+  
+  Note: if the sender selected to remain anonymous, you cannot reply to their message.</h5>
+</details>
+
+
+<details>
+  <summary><h3>Are my Happiness Packets private?</h3>
+</summary>
+  <h5>       By default, we only send your message with the recipient. They will get an e-mail with your message and
+            can view it online. We only share your name and email address with the recipient if you choose this option. We may analyse messages and their metadata for statistical analysis.
+  
+  In case of suspected abuse or Code of Conduct violations, the service administrators might view and read your
+             message to determine further processing.</h5>
+</details>
+
+
+<details>
+  <summary><h3>What happens if I choose to display my message publicly?</h3>
+</summary>
+  <h5> If both the sender and the recipient of the message agree to publish the message on the website, the
+               message will be displayed in the Happiness Archive. We encourage you to share your messages with the community, but the choice is yours and you are not obligated to choose this option if you do not feel comfortable with it. You can also choose to publish the message but keep the sender and recipient names private.
+      <br>
+      <br>
+  Note: we cannot modify the content of the message after it is sent, so if the message includes personally-identifying information or references to third parties, they will be published even if you choose to hide the sender and recipient names.</h5>
+</details>
+
+
+<details>
+  <summary><h3>I received an abusive message, what should I do?</h3>
+</summary>
+  <h5>  Please report this to fedora.happinesspackets@gmail.com, preferably by forwarding the original email that
+       contains the message.</h5>
+</details>
+
+
+<details>
+  <summary><h3> don't want to receive any email from you</h3>
+</summary>
+  <h5> Every email we sent includes a link to stop receiving all future e-mail messages. If you follow the link and
+      confirm, your email address will not be able to be used anywhere on the site. Note: if you select to block your
+       email address, you will not be able to send Happiness Packets yourself.</h5>
+</details>
+
+
+<style>
+    body {
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: rgba(0,0,0,.1);
+}
+h2 {
+  margin: 20px auto 80px;
+  font-size: 38px;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: 2px;
+  line-height: 1.5;
+}
+details {
+  width: 75%;
+  min-height: 5px;
+  max-width: 700px;
+  padding: 45px 70px 45px 45px;
+  margin: 0 auto;
+  position: relative;
+  font-size: 22px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 15px;
+  box-sizing: border-box;
+  transition: all .3s;
+}
+details + details {
+  margin-top: 20px;
+}
+details[open] {
+  min-height: 50px;
+  background-color: #f6f7f8;
+  box-shadow: 2px 2px 20px rgba(0,0,0,.2);
+}
+details p {
+  color: #96999d;
+  font-weight: 300;
+}
+summary {
+  font-weight: 500;
+  cursor: pointer;
+}
+/* removed outline as for codepen only
+  don't remove focus on elements
+  it's bad accessibility
+  don't be _that_ guy
+*/
+summary:focus {
+  outline: none;
+}
+summary::-webkit-details-marker {
+  display: none
+}
+summary::after {
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  color: rebeccapurple;
+  font-family: "Font Awesome 5 Free";
+  font-size: 15px;
+  font-style: normal;
+  font-variant-caps: normal;
+  -webkit-font-variant-ligatures: normal;
+          font-variant-ligatures: normal;
+  font-weight: 900;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  content: "\f078";
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  transition: .3s ease;
+}
+details[open] summary::after {
+  content: "\f057";
+  font-size: 30px;
+  top: 0;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  transition: .3s ease;
+}
+details[open] summary:hover::after {
+  -webkit-animation: pulse 1s ease;
+          animation: pulse 1s ease;
+}
+@-webkit-keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  75% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pulse {
+  25% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  50% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  75% {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+</style>
+
 {% endblock content %}
