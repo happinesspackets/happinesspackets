@@ -39,5 +39,11 @@ MIDDLEWARE_CLASSES = [
 INSTALLED_APPS += (
     'debug_toolbar',
 )
+#LOCAL's setup
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda x: True
+}
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 SELENIUM_SCREENSHOT_DIR = PROJECT_DIR.child('selenium-screenshots')

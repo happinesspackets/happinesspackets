@@ -11,6 +11,14 @@ urlpatterns = [
 
 if settings.ADMIN_ENABLED or settings.DEBUG:
     urlpatterns.append(url(r'^drunken-octo-lama/', include(admin.site.urls)))
+    
+    
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
+
 
 if settings.DEBUG:
     urlpatterns.append(url(r'^media/(?P<path>.*)$', django.views.static.serve, {'document_root': settings.MEDIA_ROOT}))
