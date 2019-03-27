@@ -1,27 +1,28 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 
-{% block title %}Happiness Packets{% endblock %}
+{% block extra_head %}<title>Fedora Happiness Packets</title>{% endblock %}
 
 {% block content %}
 
     <div class="page-header">
-        <h2>What are Open-Source Happiness Packets?</h2>
+        <h2>What are Fedora Happiness Packets?</h2>
     </div>
 
     <p class="lead">
-        People are generally much more loved than we think we are. But while it's easy for many to complain when
-        they don't like something, we're often fairly silent when things are good. Open-source communities
+        People are generally much more loved than they think they are. Especially when things don't go according to
+        plan, other people almost never think as harshly of you as you might think of yourself. It's easy for us to
+        complain when bad things happen, and yet we're often fairly silent when things are good. Open-source communities
         are no different, especially when our main communication channels are textual and virtual.
     </p>
 
-    <p class="lead">
-        However, the feeling that you made a difference, that your work matters and has value, and that the people
-        you work with are happy to work with you, is an awesome and important  feeling. With Open-Source Happiness
-        Packets, we're trying to spread that feeling.
+    <p>
+        The feeling that you made a difference, that your work matters and has value, and that the people
+        you work with are happy to work with you, is an awesome feeling. With Fedora Happiness Packets, we're
+        trying to spread that feeling.
     </p>
 
     <p class="text-center">
-        <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness now! <img class="emoji" src="static/images/emoji/loveletter.png" alt="💌" title="Love letter" aria-label="Emoji: Love letter"></a>
+        <a class="btn btn-primary btn-lg btn-responsive" href="{% url 'messaging:send' %}" role="button">Send some happiness now! <img class="emoji" src="static/images/emoji/loveletter.png" alt="💌" title="Love letter" aria-label="Emoji: Love letter"></a>
     </p>
 
     <h2>How does it work?</h2>
@@ -31,7 +32,7 @@
         about such feelings, and naturally feel uncomfortable or even creepy to share them.
     </p>
     <p>
-        Open-Source Happiness Packets is a very simple platform to anonymously reach out to the people that you
+        Fedora Happiness Packets is a very simple platform to anonymously reach out to the people that you
         appreciate or to whom you are thankful in your open-source community. Your message can be sent anonymously
         if you feel uncomfortable to share your name with the recipient. Of course, we encourage you to share your name,
         but it's completely optional!
@@ -41,8 +42,7 @@
     <p>
         If both the sender and the recipient agree, we can
         <a href="{% url 'messaging:archive' %}">publish the Happiness Packet</a> on the website.
-        With this, we're building an archive of open-source happiness that people and communities can use to draw
-        inspiration.
+        We hope to build an archive of open-source happiness that communities can draw inspiration from.
     </p><p>
         As an example, here are two random messages from our archive:
     </p>
@@ -50,7 +50,7 @@
     {% include 'messaging/_message_list.html' %}
 
     <p class="text-center">
-        <a class="btn btn-primary btn-lg" href="{% url 'messaging:send' %}" role="button">Send some happiness now! <img class="emoji" src="static/images/emoji/loveletter.png" alt="💌" title="Love letter" aria-label="Emoji: Love letter"></a>
+        <a class="btn btn-primary btn-lg btn-responsive" href="{% url 'messaging:send' %}" role="button">Send some happiness now! <img class="emoji" src="static/images/emoji/loveletter.png" alt="💌" title="Love letter" aria-label="Emoji: Love letter"></a>
     </p>
 
 {% endblock content %}

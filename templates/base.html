@@ -1,16 +1,18 @@
-{% load static from staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Open-source Happiness Packets</title>
+     <title>Open-source Happiness Packets</title> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic|Roboto:400,300,300italic,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
     <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/all.css' %}" rel="stylesheet">
     <link href="{% static 'css/datepicker.css' %}" rel="stylesheet">
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
     <link href="{% static 'images/favicon.ico' %}" rel="icon" type="image/x-icon">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <!--[if lt IE 8]>
         <link href="{% static 'css/bootstrap-ie7.css' %}" rel="stylesheet">
@@ -19,20 +21,55 @@
 </head>
 
 <body>
+    {% include "facebook.html" %}
     <aside>
         <div class="sidebar">
             {% url 'messaging:start' as url %}
             <a href="{{ url }}"><img src="{% static 'images/logo.png' %}" alt="Open-Source Happiness Packets" class="logo"/></a>
             <ul class="nav nav-stacked">
-                {% url 'messaging:send' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness!</a></li>
+                {% if user.is_authenticated %}
+                    <h3> {{ user.username }}</h3>
+                    {% url 'messaging:send' as url %}
+                    <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness!</a></li>
+                    {% url 'messaging:received_messages' as url %}
+                    <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">My Received Packets</a></li>
+                    {% url 'messaging:sent_messages' as url %}
+                    <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">My Sent Packets</a></li>
+                  <form id="logout" action="{% url 'oidc_logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-logout">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                    <span>&nbsp;&nbsp;Logout</span>
+                    </button>
+                  </form>
+                {% else %}
+                    <form id="login" action="{% url 'oidc_authentication_init' %}" method="get">
+                        <button type="submit" class="btn btn-login">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        <span>&nbsp;Login</span>
+                        </button>
+                    </form>
+                {% endif %}
+                {% if packets_sent == 0 %}
+                    <li><a class="total-packets">Total Happiness Spread: <b>{{ packets_sent }} 💔</b></a></li>
+                {% else %}
+                    <li><a class="total-packets">Total Happiness Spread: <b>{{ packets_sent }} 🎉</b></a></li>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                  {% url 'messaging:send' as url %}
+                  <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Send some happiness!</a></li>
+                {% endif %}
                 {% url 'messaging:start' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">What are Happiness Packets?</a></li>
+                <li role="presentation" {% ifequal request.path url %}class="active"{% endifequal %}><a href="{{ url }}">What are Happiness Packets?</a></li>
+                {% url 'messaging:inspiration' as url %}
+                <li role="presentation" {% ifequal request.path url %}class="active"{% endifequal %}><a href="{{ url }}">Get inspired</a></li>
                 {% url 'messaging:faq' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">FAQ</a></li>
+                <li role="presentation" {% ifequal request.path url %}class="active"{% endifequal %}><a href="{{ url }}">FAQ</a></li>
                 {% url 'messaging:archive' as url %}
-                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Happiness Archive</a></li>
-            </ul>
+                <li role="presentation" {% ifequal request.path url %}class="active"{% endifequal %}><a href="{{ url }}">Happiness Archive</a></li>
+                {% url 'messaging:search' as url %}
+                <li role="presentation" {% if url in request.path %}class="active"{% endif %}><a href="{{ url }}">Search the Archive</a></li>
+              </ul>
         </div>
     </aside>
     <main>
@@ -48,23 +85,28 @@
                     {% block content %}{% endblock %}
                 </div>
             </div>
-            <footer><small>
-                <hr>
-                <a href="https://twitter.com/happinesspacket" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @happinesspacket</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                <br>
-                Open-Source Happiness Packets is an
-                <a href="https://github.com/mxsasha/happinesspackets/">open-source project</a> by
-                <a href="https://twitter.com/mxsash">Sasha Romijn</a> and
-                <a href="https://twitter.com/thatdocslady">Mikey Ariel</a>.
-                <br>
-                Design and artwork by <a href="https://twitter.com/olasitarska">Ola Sitarska</a>.
-                <br>
-                Need help? <a href="mailto:info@happinesspackets.io">info@happinesspackets.io</a>
-                <img class="emoji" src="{% static 'images/emoji/loveletter.png' %}" alt="💌" title="Love letter" aria-label="Emoji: Love letter" style="vertical-align: text-bottom">
-
-            </small></footer>
         </div>
-    </main>
-</body>
+            <footer class="footer">
+              <small>
+                  <hr>
+                  {% block footer %}
+                  {% include "follow.html" %}
+                  <div class="footer-msg">
+                    {% endblock %}
+                    Fedora Happiness Packets is a fork of <a href="https://github.com/mxsasha/happinesspackets/">Happiness Packets</a> and part of GSoC 2018.
+                    <br>
+                    Need help? <a href="mailto:fedora.happinesspackets@gmail.com">fedora.happinesspackets@gmail.com</a>
+                    <img class="emoji" src="{% static 'images/emoji/loveletter.png' %}" alt="💌" title="Love letter" aria-label="Emoji: Love letter" style="vertical-align: text-bottom">
+                    <br>
+                    Got feedback? File an issue <a href="https://pagure.io/fedora-commops/fedora-happiness-packets/new_issue">here</a>
+                  </div>
+                  <div class="socio-buttons">
+                  <a href="https://www.facebook.com/TheFedoraProject"><i class="fab fa-facebook-f fa-lg"></i></a>
+                  <a href="https://twitter.com/fedora"><i class="fab fa-twitter fa-lg"></i></a>
+                  <a href="https://plus.google.com/112917221531140868607"><i class="fab fa-google-plus-g fa-lg"></i></a>
+                </div>
+              </small>
+            </footer>
+        </main>
+    </body>
 </html>
