@@ -1,37 +1,42 @@
 ---
-machine:
-  services:
-    - rabbitmq-server
-  environment:
-    EMAIL_USER: notused
-    EMAIL_PASSWORD: notused
-    MESSAGEBIRD_USERNAME: notused
-    MESSAGEBIRD_KEY: notused
-    DB_NAME: circle_test
-    DB_USERNAME: ubuntu
-    DB_PASSWORD:
-    DJANGO_HOSTNAME: localhost:8000
-    DJANGO_ALLOWED_HOSTS: '*'
-    DJANGO_LOGFILE: /tmp/django.log
-    SECRET_KEY: 'integration-test-only'
-    DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
-    PORTAL_CELERY_TASK_QUEUE: celery
-    PYTHONUNBUFFERED: x
-
-dependencies:
-  override:
-    - pip install -U --exists-action=s -r requirements/ci.txt || (echo 'Retrying pip'; pip install -U --exists-action=s -r requirements/ci.txt) || (echo 'Retrying pip 2'; pip install -U --exists-action=s -r requirements/ci.txt)
-
-test:
-  pre:
-    - ./manage.py collectstatic --noinput:
-        parallel: true
-  override:
-    - ./run_ci_tests.bash:
-        parallel: true
-        timeout: 600
-
-general:
-  artifacts:
-    - "selenium-screenshots"
-    - "htmlcov"
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8-buster
+    environment:
+      EMAIL_USER: notused
+      EMAIL_PASSWORD: notused
+      MESSAGEBIRD_USERNAME: notused
+      MESSAGEBIRD_KEY: notused
+      DB_NAME: circle_test
+      DB_USERNAME: ubuntu
+      DB_PASSWORD:
+      DJANGO_HOSTNAME: localhost:8000
+      DJANGO_ALLOWED_HOSTS: '*'
+      DJANGO_LOGFILE: /tmp/django.log
+      SECRET_KEY: 'integration-test-only'
+      DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
+      PORTAL_CELERY_TASK_QUEUE: celery
+      PYTHONUNBUFFERED: x
+    steps:
+      - checkout
+      - run:
+          name: install dependencies (via pip)
+          command: "pip install -U --exists-action=s -r requirements/ci.txt || (echo 'Retrying pip'; pip install -U --exists-action=s -r requirements/ci.txt) || (echo 'Retrying pip 2'; pip install -U --exists-action=s -r requirements/ci.txt)"
+      - run:
+          name: run unit tests
+          command: "./manage.py collectstatic --noinput"
+      - run:
+          name: run flake8 checks
+          command: "flake8 happinesspackets"
+      - run:
+          name: check no migrations are created
+          command: "./manage.py makemigrations --dry-run --noinput | grep -i 'no changes detected'"
+      - run:
+          name: run coverage report
+          command: "coverage run ./manage.py test -v 2 --noinput && coverage html --fail-under=90"
+      - store_artifacts:
+          path: selenium-screenshots
+      - store_artifacts:
+          path: htmlcov
