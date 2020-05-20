@@ -17,13 +17,14 @@ jobs:
       DJANGO_LOGFILE: /tmp/django.log
       SECRET_KEY: 'integration-test-only'
       DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
+      PIPENV_DEV: 1
       PORTAL_CELERY_TASK_QUEUE: celery
       PYTHONUNBUFFERED: x
     steps:
       - checkout
       - run:
-          name: install dependencies (via pip)
-          command: "pip install -U --exists-action=s -r requirements/ci.txt || (echo 'Retrying pip'; pip install -U --exists-action=s -r requirements/ci.txt) || (echo 'Retrying pip 2'; pip install -U --exists-action=s -r requirements/ci.txt)"
+          name: install dependencies (via Pipenv)
+          command: "pipenv install"
       - run:
           name: run unit tests
           command: "./manage.py collectstatic --noinput"

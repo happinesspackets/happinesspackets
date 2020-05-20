@@ -1,4 +1,0 @@
--r base.txt
-psycopg2==2.6.1
-gunicorn==19.4.1
-python-memcached==1.57
