@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements/ci.txt
     - name: Collect static
       run: |
-        python manage.py --noinput collectstatic
+        python manage.py collectstatic --noinput
     - name: Run Tests
       run: |
         python manage.py test
