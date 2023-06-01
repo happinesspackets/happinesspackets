@@ -9,6 +9,7 @@ on:
 env:
   DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
   SECRET_KEY: secret
+  DJANGO_ALLOWED_HOSTS: localhost
 
 jobs:
   build:
