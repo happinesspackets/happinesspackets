@@ -1,3 +1,5 @@
+import dj_database_url
+
 # noinspection PyUnresolvedReferences
 from .base import *  # noqa
 
@@ -5,18 +7,17 @@ SECRET_KEY = get_env_variable("SECRET_KEY")
 
 SESSION_COOKIE_AGE = 3600 * 2
 
-ALLOWED_HOSTS = get_env_variable('DJANGO_ALLOWED_HOSTS').split(',')
+
+ALLOWED_HOSTS = ["happinesspackets.fly.dev", ".happinesspackets.io"]
 
 ADMIN_ENABLED = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': get_env_variable("DB_NAME"),
-        'USER': get_env_variable("DB_USERNAME"),
-        'PASSWORD': get_env_variable("DB_PASSWORD"),
-        'ATOMIC_REQUESTS': True,
-        'CONN_MAX_AGE': 300,
+        dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
 }
 
@@ -28,15 +29,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = (
 )
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
-
-LOGGING['handlers']['file'] = {
-    'level': 'INFO',
-    'class': 'logging.handlers.WatchedFileHandler',
-    'formatter': 'verbose',
-    'filename': get_env_variable("DJANGO_LOGFILE"),
-}
-
-LOGGING['loggers']['']['handlers'].append('file')
 
 EMAIL_HOST = 'in.mailjet.com'
 EMAIL_HOST_USER = get_env_variable('EMAIL_USER')
