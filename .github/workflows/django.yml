@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  DJANGO_SETTINGS_MODULE=happinesspackets.settings.ci
+  DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
 
 jobs:
   build:
