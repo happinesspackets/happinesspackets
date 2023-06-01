@@ -7,9 +7,16 @@ on:
     branches: [ "main" ]
 
 env:
+  EMAIL_USER: notused
+  EMAIL_PASSWORD: notused
+  DB_NAME: circle_test
+  DB_USERNAME: ubuntu
+  DB_PASSWORD:
+  DJANGO_HOSTNAME: localhost:8000
+  DJANGO_ALLOWED_HOSTS: '*'
+  DJANGO_LOGFILE: /tmp/django.log
+  SECRET_KEY: 'integration-test-only'
   DJANGO_SETTINGS_MODULE: happinesspackets.settings.ci
-  SECRET_KEY: secret
-  DJANGO_ALLOWED_HOSTS: localhost
 
 jobs:
   build:
