@@ -3,9 +3,10 @@ from __future__ import unicode_literals
 
 import factory
 from django.test import TestCase
+from factory.django import DjangoModelFactory
 
 
-class MessageModelFactory(factory.DjangoModelFactory):
+class MessageModelFactory(DjangoModelFactory):
     class Meta:
         model = 'messaging.Message'
 
@@ -17,7 +18,7 @@ class MessageModelFactory(factory.DjangoModelFactory):
     message = 'message content'
 
 
-class BlacklistedEmailFactory(factory.DjangoModelFactory):
+class BlacklistedEmailFactory(DjangoModelFactory):
     class Meta:
         model = 'messaging.BlacklistedEmail'
 

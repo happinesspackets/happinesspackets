@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import logging
 import re
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.crypto import salted_hmac

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import logging
 
 from django.contrib import messages
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from django.utils.crypto import salted_hmac, constant_time_compare
 from django.utils.decorators import method_decorator

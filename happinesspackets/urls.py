@@ -2,15 +2,15 @@ from __future__ import unicode_literals
 
 import django
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, path, re_path
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^', include('happinesspackets.messaging.urls', namespace="messaging")),
+    path('', include('happinesspackets.messaging.urls', namespace="messaging")),
 ]
 
-if settings.ADMIN_ENABLED or settings.DEBUG:
-    urlpatterns.append(url(r'^drunken-octo-lama/', include(admin.site.urls)))
+# if settings.ADMIN_ENABLED or settings.DEBUG:
+#     urlpatterns.append(path('drunken-octo-lama/', include(admin.site.urls)))
 
 if settings.DEBUG:
-    urlpatterns.append(url(r'^media/(?P<path>.*)$', django.views.static.serve, {'document_root': settings.MEDIA_ROOT}))
+    urlpatterns.append(re_path(r'^media/(?P<path>.*)$', django.views.static.serve, {'document_root': settings.MEDIA_ROOT}))
