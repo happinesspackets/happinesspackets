@@ -29,13 +29,3 @@ the correct ``DJANGO_SETTINGS_MODULE``, for example with::
     ./t
 
 The ``t`` command is a very short shell script that runs the tests with the correct settings and reports on coverage.
-
-To run the integration tests::
-
-    ./manage.py test -v 2 -p integration_test*.py --settings=happinesspackets.settings.tsting
-
-This repository contains some documentation directly related to the code, built with Sphinx. To build the docs::
-
-    cd docs
-    make html
-    open _build/html/index.html
