@@ -11,6 +11,3 @@ urlpatterns = [
 
 # if settings.ADMIN_ENABLED or settings.DEBUG:
 #     urlpatterns.append(path('drunken-octo-lama/', include(admin.site.urls)))
-
-if settings.DEBUG:
-    urlpatterns.append(re_path(r'^media/(?P<path>.*)$', django.views.static.serve, {'document_root': settings.MEDIA_ROOT}))

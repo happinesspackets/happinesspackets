@@ -1,0 +1,17 @@
+# fly.toml app configuration file generated for happinesspackets on 2023-06-01T15:19:05+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "happinesspackets"
+primary_region = "ams"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[deploy]
+  release_command = "python manage.py migrate --noinput"
