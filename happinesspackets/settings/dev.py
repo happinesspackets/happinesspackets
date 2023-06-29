@@ -26,8 +26,4 @@ CSRF_COOKIE_SECURE = False
 
 ADMIN_ENABLED = True
 
-INSTALLED_APPS += (
-    'debug_toolbar',
-)
-
 SELENIUM_SCREENSHOT_DIR = PROJECT_DIR.child('selenium-screenshots')

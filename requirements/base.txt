@@ -10,9 +10,8 @@ crispy-bootstrap3==2022.1
 # Basic Python libraries
 Unipath==1.1          # Better path handling
 pytz==2023.3          # Timezone data
-ipython==8.13.2        # Prettier python prompt
-gnureadline==8.1.2    # Dependency of ipython
 dj-database-url==2.0.0
+whitenoise==6.4.0
 
 # PEP8 validation with dependencies
 flake8==6.0.0
