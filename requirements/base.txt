@@ -1,4 +1,4 @@
-Django==4.2.1
+Django==4.2.3
 
 # Basic Django extensions
 django-extensions==3.2.1
