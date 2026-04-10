@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.12"
 
 [options]
-exclude-newer = "2026-04-03T11:26:54.331114717Z"
+exclude-newer = "2026-04-03T11:35:11.147866044Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -181,18 +181,6 @@ wheels = [
 ]
 
 [[package]]
-name = "dj-database-url"
-version = "3.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/03/f6/00b625e9d371b980aa261011d0dc906a16444cb688f94215e0dc86996eb5/dj_database_url-3.1.2.tar.gz", hash = "sha256:63c20e4bbaa51690dfd4c8d189521f6bf6bc9da9fcdb23d95d2ee8ee87f9ec62", size = 11490, upload-time = "2026-02-19T15:30:23.638Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/cf/a9/57c66006373381f1d3e5bd94216f1d371228a89f443d3030e010f73dd198/dj_database_url-3.1.2-py3-none-any.whl", hash = "sha256:544e015fee3efa5127a1eb1cca465f4ace578265b3671fe61d0ed7dbafb5ec8a", size = 8953, upload-time = "2026-02-19T15:30:39.37Z" },
-]
-
-[[package]]
 name = "django"
 version = "5.2.12"
 source = { registry = "https://pypi.org/simple" }
@@ -315,7 +303,6 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "crispy-bootstrap3" },
-    { name = "dj-database-url" },
     { name = "django" },
     { name = "django-crispy-forms" },
     { name = "django-extensions" },
@@ -339,7 +326,6 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "crispy-bootstrap3", specifier = ">=2024.1" },
-    { name = "dj-database-url", specifier = ">=2.3" },
     { name = "django", specifier = "~=5.2.0" },
     { name = "django-crispy-forms", specifier = ">=2.4" },
     { name = "django-extensions", specifier = ">=3.2" },

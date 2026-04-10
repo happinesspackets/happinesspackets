@@ -10,7 +10,6 @@ dependencies = [
     "django-crispy-forms>=2.4",
     "crispy-bootstrap3>=2024.1",
     "django-model-utils>=5.0",
-    "dj-database-url>=2.3",
     "whitenoise>=6.8",
     "python-dateutil>=2.9",
     "psycopg2-binary>=2.9",

@@ -1,7 +1,5 @@
 import os
 
-import dj_database_url
-
 # noinspection PyUnresolvedReferences
 from .base import *  # noqa
 
@@ -15,10 +13,15 @@ ALLOWED_HOSTS = [hostname, "www." + hostname]
 ADMIN_ENABLED = True
 
 DATABASES = {
-    "default": dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": "host.docker.internal",
+        "PORT": "5432",
+        "CONN_MAX_AGE": None,
+    }
 }
 
 TEMPLATES[0]["OPTIONS"]["loaders"] = (
