@@ -36,7 +36,9 @@ TEMPLATES[0]["OPTIONS"]["loaders"] = (
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 
-DEFAULT_FROM_EMAIL = os.getenv("EMAIL_FROM", "Happiness Packets <info@happinesspackets.io>")
+DEFAULT_FROM_EMAIL = os.getenv(
+    "EMAIL_FROM", "Happiness Packets <info@happinesspackets.io>"
+)
 EMAIL_HOST = os.getenv("EMAIL_HOST", "in.mailjet.com")
 EMAIL_HOST_USER = os.getenv("EMAIL_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
