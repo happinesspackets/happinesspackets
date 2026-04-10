@@ -1,1 +1,11 @@
-fly.toml
+.venv
+.git
+.github
+.gitignore
+*.sqlite3
+__pycache__
+*.pyc
+.coverage
+htmlcov
+selenium-screenshots
+artwork

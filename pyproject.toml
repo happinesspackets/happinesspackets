@@ -1,0 +1,34 @@
+[project]
+name = "happinesspackets"
+version = "0.1.0"
+description = "Open-Source Happiness Packets"
+readme = "README.rst"
+requires-python = ">=3.12"
+dependencies = [
+    "django~=5.2.0",
+    "django-extensions>=3.2",
+    "django-crispy-forms>=2.4",
+    "crispy-bootstrap3>=2024.1",
+    "django-model-utils>=5.0",
+    "dj-database-url>=2.3",
+    "whitenoise>=6.8",
+    "python-dateutil>=2.9",
+    "factory-boy>=3.3",
+    "psycopg2-binary>=2.9",
+    "gunicorn>=23.0",
+]
+
+[dependency-groups]
+dev = [
+    "coverage>=7.6",
+    "django-debug-toolbar>=5.0",
+    "selenium>=4.27",
+    "ipython>=8.30",
+    "ruff>=0.11",
+]
+
+[tool.ruff]
+exclude = ["happinesspackets/*/migrations/*"]
+
+[tool.ruff.lint]
+ignore = ["E501", "F405"]

@@ -19,13 +19,8 @@ communities.
 The structure and format of the site is basic, and contributions are
 welcome!
 
-To run this project or the tests, you need to set up a virtualenv, install the dev requirements and set
-the correct ``DJANGO_SETTINGS_MODULE``, for example with::
+To run this project or the tests, you need `uv <https://docs.astral.sh/uv/>`_ installed::
 
-    virtualenv --no-site-packages --prompt='(happinesspackets)' virtualenv/
-    source virtualenv/bin/activate
-    pip install -r requirements/dev.txt
+    uv sync
     export DJANGO_SETTINGS_MODULE=happinesspackets.settings.dev
-    ./t
-
-The ``t`` command is a very short shell script that runs the tests with the correct settings and reports on coverage.
+    uv run python manage.py test

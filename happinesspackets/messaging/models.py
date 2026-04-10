@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import logging
 import re
 
@@ -14,18 +11,20 @@ from model_utils.models import TimeStampedModel
 from happinesspackets.utils.misc import readable_random_token, send_html_mail
 
 logger = logging.getLogger(__name__)
-BLACKLIST_HMAC_SALT = 'happinesspackets.messaging.views.BlacklistEmailView'
+BLACKLIST_HMAC_SALT = "happinesspackets.messaging.views.BlacklistEmailView"
 
 
 class Message(TimeStampedModel):
     STATUS = Choices(
-        'pending_sender_confirmation',
-        'sent',
-        'read',
+        "pending_sender_confirmation",
+        "sent",
+        "read",
     )
 
     identifier = models.CharField(max_length=255, db_index=True)
-    status = models.CharField(choices=STATUS, default=STATUS.pending_sender_confirmation, max_length=255)
+    status = models.CharField(
+        choices=STATUS, default=STATUS.pending_sender_confirmation, max_length=255
+    )
 
     sender_name = models.CharField(max_length=255)
     sender_email = models.EmailField()
@@ -49,59 +48,73 @@ class Message(TimeStampedModel):
     admin_approved_public = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['-created']
+        ordering = ["-created"]
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
         self.sender_email_stripped = strip_email(self.sender_email)
         self.recipient_email_stripped = strip_email(self.recipient_email)
         if not self.pk or force_insert:
             self.identifier = readable_random_token(alphanumeric=True)
-            while Message.objects.filter(identifier=self.identifier).count():
-                self.identifier = readable_random_token(alphanumeric=True)  # pragma: no cover
-        return super(Message, self).save(force_insert, force_update, using, update_fields)
+            while Message.objects.filter(identifier=self.identifier).exists():
+                self.identifier = readable_random_token(
+                    alphanumeric=True
+                )  # pragma: no cover
+        return super().save(force_insert, force_update, using, update_fields)
 
     def send_sender_confirmation(self, use_https, domain):
         stripped_email = strip_email(self.sender_email)
-        if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
+        if BlacklistedEmail.objects.filter(stripped_email=stripped_email).exists():
             return
 
-        blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.sender_email).hexdigest()
-        blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.sender_email, 'digest': blacklist_digest})
+        blacklist_digest = salted_hmac(
+            BLACKLIST_HMAC_SALT, self.sender_email
+        ).hexdigest()
+        blacklist_url = reverse(
+            "messaging:blacklist_email",
+            kwargs={"email": self.sender_email, "digest": blacklist_digest},
+        )
         self.sender_email_token = readable_random_token(alphanumeric=True)
         context = {
-            'message': self,
-            'protocol': 'https' if use_https else 'http',
-            'domain': domain,
-            'recipient': self.sender_email,
-            'blacklist_url': blacklist_url,
+            "message": self,
+            "protocol": "https" if use_https else "http",
+            "domain": domain,
+            "recipient": self.sender_email,
+            "blacklist_url": blacklist_url,
         }
-        subject = render_to_string('messaging/sender_confirmation_subject.txt', context)
-        subject = ' '.join(subject.splitlines())
-        body_txt = render_to_string('messaging/sender_confirmation_mail.txt', context)
-        body_html = render_to_string('messaging/sender_confirmation_mail.html', context)
+        subject = render_to_string("messaging/sender_confirmation_subject.txt", context)
+        subject = " ".join(subject.splitlines())
+        body_txt = render_to_string("messaging/sender_confirmation_mail.txt", context)
+        body_html = render_to_string("messaging/sender_confirmation_mail.html", context)
         send_html_mail(subject, body_txt, body_html, self.sender_email)
         self.save()
 
     def send_to_recipient(self, use_https, domain):
         stripped_email = strip_email(self.recipient_email)
-        if BlacklistedEmail.objects.filter(stripped_email=stripped_email).count():
+        if BlacklistedEmail.objects.filter(stripped_email=stripped_email).exists():
             return
 
-        blacklist_digest = salted_hmac(BLACKLIST_HMAC_SALT, self.recipient_email).hexdigest()
-        blacklist_url = reverse('messaging:blacklist_email', kwargs={'email': self.recipient_email, 'digest': blacklist_digest})
+        blacklist_digest = salted_hmac(
+            BLACKLIST_HMAC_SALT, self.recipient_email
+        ).hexdigest()
+        blacklist_url = reverse(
+            "messaging:blacklist_email",
+            kwargs={"email": self.recipient_email, "digest": blacklist_digest},
+        )
         self.recipient_email_token = readable_random_token(alphanumeric=True)
         self.status = Message.STATUS.sent
         context = {
-            'message': self,
-            'protocol': 'https' if use_https else 'http',
-            'domain': domain,
-            'recipient': self.recipient_email,
-            'blacklist_url': blacklist_url,
+            "message": self,
+            "protocol": "https" if use_https else "http",
+            "domain": domain,
+            "recipient": self.recipient_email,
+            "blacklist_url": blacklist_url,
         }
-        subject = render_to_string('messaging/recipient_subject.txt', context)
-        subject = ' '.join(subject.splitlines())
-        body_txt = render_to_string('messaging/recipient_mail.txt', context)
-        body_html = render_to_string('messaging/recipient_mail.html', context)
+        subject = render_to_string("messaging/recipient_subject.txt", context)
+        subject = " ".join(subject.splitlines())
+        body_txt = render_to_string("messaging/recipient_mail.txt", context)
+        body_html = render_to_string("messaging/recipient_mail.html", context)
         send_html_mail(subject, body_txt, body_html, self.recipient_email)
         self.save()
 
@@ -113,4 +126,4 @@ class BlacklistedEmail(TimeStampedModel):
 
 
 def strip_email(email):
-    return re.sub('[^@\w]', '', re.sub('\+\w+', '', email.lower()))
+    return re.sub(r"[^@\w]", "", re.sub(r"\+\w+", "", email.lower()))
