@@ -2,8 +2,8 @@ Open-source Happiness Packets
 =============================
 
 The Open-Source Happiness Packets project was created by `Sasha
-Romijn <https://twitter.com/mxsash>`__ and `Mikey
-Ariel <https://twitter.com/thatdocslady>`__ in March 2016. The idea came
+Romijn <https://hachyderm.io/@sash>`__ and Mikey
+Ariel in March 2016. The idea came
 about while we were building our `Healthy Minds in a Healthy
 Community <https://github.com/erikr/well-being/>`__ presentation for
 `Djangocon Europe 2016 <https://2016.djangocon.eu/speakers/13>`__. One

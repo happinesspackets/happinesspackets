@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.12"
 
 [options]
-exclude-newer = "2026-04-02T20:26:56.389331Z"
+exclude-newer = "2026-04-03T11:26:54.331114717Z"
 exclude-newer-span = "P7D"
 
 [[package]]
@@ -320,7 +320,6 @@ dependencies = [
     { name = "django-crispy-forms" },
     { name = "django-extensions" },
     { name = "django-model-utils" },
-    { name = "factory-boy" },
     { name = "gunicorn" },
     { name = "psycopg2-binary" },
     { name = "python-dateutil" },
@@ -331,6 +330,7 @@ dependencies = [
 dev = [
     { name = "coverage" },
     { name = "django-debug-toolbar" },
+    { name = "factory-boy" },
     { name = "ipython" },
     { name = "ruff" },
     { name = "selenium" },
@@ -344,7 +344,6 @@ requires-dist = [
     { name = "django-crispy-forms", specifier = ">=2.4" },
     { name = "django-extensions", specifier = ">=3.2" },
     { name = "django-model-utils", specifier = ">=5.0" },
-    { name = "factory-boy", specifier = ">=3.3" },
     { name = "gunicorn", specifier = ">=23.0" },
     { name = "psycopg2-binary", specifier = ">=2.9" },
     { name = "python-dateutil", specifier = ">=2.9" },
@@ -355,6 +354,7 @@ requires-dist = [
 dev = [
     { name = "coverage", specifier = ">=7.6" },
     { name = "django-debug-toolbar", specifier = ">=5.0" },
+    { name = "factory-boy", specifier = ">=3.3" },
     { name = "ipython", specifier = ">=8.30" },
     { name = "ruff", specifier = ">=0.11" },
     { name = "selenium", specifier = ">=4.27" },
